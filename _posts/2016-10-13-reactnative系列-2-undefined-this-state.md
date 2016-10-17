@@ -14,7 +14,7 @@ undefined is not an object (evaluating 'this.state.username')
 
 请看代码注释
 
-```
+```javascript
 _renderRow() {
 	console.log(this.state.username);
 }
@@ -41,7 +41,7 @@ render(){
 
 this会指向全局window对象，window是没有state属性的。state属性是React.Component的默认属性，不是window的默认属性，所以访问this.state会出错:
 
-```
+```javascript
 _renderFooter() {
 	console.log(this)// 不会抛错，this指向window对象
 	console.log(this.state) // 抛错，window对象没有state属性
@@ -54,7 +54,7 @@ _renderFooter() {
 ### 方法1, bind(this)
 可以通过显示给函数对象bind this指针的方法来解决this指向不对的问题。
 
-```
+```javascript
 render(){
 	return(
 		<ListView dataSource={this.state.dataSource}
@@ -70,7 +70,7 @@ render(){
 
 还可以通过传递匿名函数(闭包)作为函数参数，闭包里面调用对应的函数时会自动绑定正确的this指针.
 
-```
+```javascript
 render(){
 	return(
 		<ListView dataSource={this.state.dataSource}
@@ -84,8 +84,3 @@ render(){
          	}}
                             />);
 ```
-
- 
-
-
-
