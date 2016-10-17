@@ -26,7 +26,7 @@ console.log(JSON.stringify({message:"Hello World"}));
 3. 安卓应用可以通过`adb logcat`看到打印日志
 
 截图1， chrome console 日志
-![chrome console 日志](../assets/img/consolelog.png)
+![chrome console 日志](/assets/img/consolelog.png)
 
 ## Chrome Debug UI
 其实上面console.log里面已经提到了chrome debug ui.
@@ -53,9 +53,10 @@ Nuclide 可以在js文件里面下断点。
 4. 在iOS模拟器里面CMD+D -> Show Inspector
 5. 然后你就可以在nuclide里面看app的UI结构了.
 
-截图2:
-![React Native Inspector截图](../assets/img/feature-debugger-languages-react-native-element-inspector.png)
+截图2,React Native Inspector截图:
+![React Native Inspector截图](/assets/img/feature-debugger-languages-react-native-element-inspector.png)
 
+Nuclide 对安卓支持不好😭
 
 参考:
 [Nuclide for React Native](https://nuclide.io/docs/platforms/react-native/)
