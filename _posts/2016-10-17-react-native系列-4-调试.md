@@ -56,7 +56,7 @@ Nuclide 可以在js文件里面下断点。
 截图2,React Native Inspector截图:
 ![React Native Inspector截图](/assets/img/feature-debugger-languages-react-native-element-inspector.png)
 
-Nuclide 对安卓支持不好😭
+Nuclide 也可以用于React Native Android调试。😁😊
 
 参考:
 [Nuclide for React Native](https://nuclide.io/docs/platforms/react-native/)
