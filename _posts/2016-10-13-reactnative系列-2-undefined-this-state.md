@@ -84,3 +84,8 @@ render(){
          	}}
                             />);
 ```
+
+## 参考
+[JavaScript对象模型-执行模型](http://www.cnblogs.com/riccc/archive/2008/02/15/javascript-object-model-execution-model.html), 讲解非常详细
+
+[JavaScript系列----作用域链和闭包](http://www.cnblogs.com/renlong0602/p/4398883.html)
