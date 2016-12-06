@@ -23,14 +23,14 @@ menu:
   关于: /about
 
 #### 控件
-widgets: 
+widgets:
 - category
 - tag
 - links
 - rss
 
-#### RSS 
-rss: /atom.xml 
+#### RSS
+rss: /atom.xml
 
 #### 图片相关
 imglogo:
@@ -46,7 +46,7 @@ close_aside: false      ##是否在文章页面自动关闭侧边栏
 #### 首页相关
 index:
   expand: true              ## 首页文章是否展开。默认为展开式，显示 Read More。
-  excerpt_link: Read More    
+  excerpt_link: 显示更多    
 
 #### 作者信息
 author:
@@ -61,7 +61,7 @@ author:
   email:     
   twitter:   
   github:     
-  facebook: 
+  facebook:
   linkedin:   
   google_plus:   
   stackoverflow:  
@@ -76,17 +76,17 @@ toc:
 links:
   码农圈: https://coderq.com,一个面向程序员交流分享的新一代社区
   Jark's Blog: http://wuchong.me
-  
+
 #### 评论
-duoshuo_shortname: 
+duoshuo_shortname:
 disqus_shortname:  
 
 #### 分享按钮
 jiathis:
   enable: false   ## 默认使用主题内建分享
   id:    
-  tsina: 
-  
+  tsina:
+
 #### 网站统计
 google_analytics:
   enable: false
@@ -105,16 +105,16 @@ fancybox: true
 totop: true           
 
 #### 自定义搜索
-google_cse: 
+google_cse:
   enable: false
   cx:  
 baidu_search:    
   enable: false
   id:   
-  site: http://zhannei.baidu.com/cse/search 
+  site: http://zhannei.baidu.com/cse/search
 tinysou_search:     ## http://tinysou.com/
   enable: false
-  id: "4ac092ad8d749fdc6293" 
+  id: "4ac092ad8d749fdc6293"
 ```
 
 ###属性功能
@@ -134,7 +134,7 @@ title: tags (或categories)
 提供了7种小工具。包括标签、分类、RSS、友情链接、微博秀。
 
  **友情链接**：友情链接的网址添加可以在`links`属性下添加。
- 
+
  **微博秀**：需要注意的是，如果要启用微博秀，您必须填上`author`属性下`tsina`和`weibo_verifier`的值，前者是您微博ID，后者是您微博秀的验证码，访问 http://app.weibo.com/tool/weiboshow 在如下图位置，可以获得您的 verifier，如：我的是`b3593ceb`。
 ![](http://ww1.sinaimg.cn/large/81b78497jw1emegd6b0ytj209204pweu.jpg)
 
