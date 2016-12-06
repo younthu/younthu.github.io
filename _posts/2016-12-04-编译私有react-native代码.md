@@ -16,45 +16,45 @@ title: 编译私有React-Native代码
 1. **坑1，boost下载失败**
 
 	说明文档里面指定的 gradle-download-task版本有问题， 要用最新版，老版的2.0.0会抛403下载失败，导致编译通不过。测试de.undercouch:gradle-download-task:3.1.2可以工作。
-
-~~~
-classpath 'de.undercouch:gradle-download-task:3.1.2'
-~~~
-
+	
+	~~~
+	classpath 'de.undercouch:gradle-download-task:3.1.2'
+	~~~
+		
 1. **NDK版本不对导致编译失败**
 	
 	[文档](https://facebook.github.io/react-native/docs/android-building-from-source.html)里面指定NDK是android-ndk-r10e, 我用brew搜不到r10e,于是装了一个13b, 结果编译错误，只能乖乖手动下载r10e的包然后解压，然后在.zshrc里面设置ANDROID_NDK路径
 	
-~~~
+	~~~
 	export ANDROID_NDK=/Users/your_home/android-ndk/android-ndk-r10e
-~~~
+	~~~
 	
-用android-ndk-r13b编译抛错如下:
+	用android-ndk-r13b编译抛错如下:
 	
-~~~
+	~~~
 	:ReactAndroid:buildReactNdkLib
-[armeabi-v7a] Compile++      : reactnativejni <= Dummy.cpp
-[armeabi-v7a] Compile++      : reactnativejnifb <= CatalystInstanceImpl.cpp
-make: [armeabi-v7a] Compile++      : reactnativejnifb <= CxxModuleWrapper.cpp
-/usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
-make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
-[armeabi-v7a] Compile++      : reactnativejnifb <= JExecutorToken.cpp
-make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
-make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
-make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejni/Dummy.o] Error 1
-make: *** Waiting for unfinished jobs....
-make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/CxxModuleWrapper.o] Error 1
-make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/CatalystInstanceImpl.o] Error 1
-make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/JExecutorToken.o] Error 1
-[armeabi-v7a] Compile++      : reactnativejnifb <= JMessageQueueThread.cpp
-make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
-make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/JMessageQueueThread.o] Error 1
-:ReactAndroid:buildReactNdkLib FAILED
-FAILURE: Build failed with an exception.
-* What went wrong:
-Execution failed for task ':ReactAndroid:buildReactNdkLib'.
-> Process 'command '/usr/local/Cellar/android-ndk/r13b/ndk-build'' finished with non-zero exit value 2
-~~~
+	[armeabi-v7a] Compile++      : reactnativejni <= Dummy.cpp
+	[armeabi-v7a] Compile++      : reactnativejnifb <= CatalystInstanceImpl.cpp
+	make: [armeabi-v7a] Compile++      : reactnativejnifb <= CxxModuleWrapper.cpp
+	/usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
+	make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
+	[armeabi-v7a] Compile++      : reactnativejnifb <= JExecutorToken.cpp
+	make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
+	make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
+	make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejni/Dummy.o] Error 1
+	make: *** Waiting for unfinished jobs....
+	make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/CxxModuleWrapper.o] Error 1
+	make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/CatalystInstanceImpl.o] Error 1
+	make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/JExecutorToken.o] Error 1
+	[armeabi-v7a] Compile++      : reactnativejnifb <= JMessageQueueThread.cpp
+	make: /usr/local/Cellar/android-ndk/r13b/toolchains/arm-linux-androideabi-4.8/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++: No such file or directory
+	make: *** [/Users/andrewy/sourcecode/github/dgandroid3/ReactNative/dgAndroid/node_modules/react-native/ReactAndroid/build/tmp/buildReactNdkLib/local/armeabi-v7a/objs/reactnativejnifb/JMessageQueueThread.o] Error 1
+	:ReactAndroid:buildReactNdkLib FAILED
+	FAILURE: Build failed with an exception.
+	* What went wrong:
+	Execution failed for task ':ReactAndroid:buildReactNdkLib'.
+	> Process 'command '/usr/local/Cellar/android-ndk/r13b/ndk-build'' finished with non-zero exit value 2
+	~~~
 
 1. react-native-fetch-blob编译失败 
 	
@@ -64,38 +64,38 @@ Execution failed for task ':ReactAndroid:buildReactNdkLib'.
 	
 	解决方法: 把react-native-fetch-blob/android/build.gradle下面的
 	
-~~~
+	~~~
 	compile 'com.facebook.react:react-native:+'
-~~~
+	~~~
 	
 	替换成
 	
-~~~
+	~~~
 	compile project(':ReactAndroid')
-~~~
+	~~~
 	
 1. react-native 重复的问题
 
    前面所有问题解决以后还可能会遇到下面的问题
    
-~~~
-   :app:processDebugResources FAILED
+	~~~
+	:app:processDebugResources FAILED
 
 	FAILURE: Build failed with an exception.
 
 	* What went wrong:
 	Execution failed for task 	':app:processDebugResources'.
 	> Error: more than one library with package 	name 'com.facebook.react'
-~~~
+	~~~
 
-解决办法:
+	解决办法:
 	在your_project_root/android/app/build.gradle里面添加如下配置(放在dependency同一层级即可)
 	
-~~~
+	~~~
 	configurations.all {
-    exclude group: 'com.facebook.react', module: 'react-native'
+		exclude group: 'com.facebook.react', module: 'react-native'
 	}
-~~~
+	~~~
 
 1. Boost 下载失败的问题。
 
@@ -103,9 +103,9 @@ Execution failed for task ':ReactAndroid:buildReactNdkLib'.
   
   然后，如果你网络比较差，经常下到一半超时断线,你可以在浏览器里面把boost下载下来，然后，命令行里面boost开始下载以后CTRL+C中断，然后用浏览器里面下载的boost覆盖目标boost. 我这边是
   
-~~~
-  node_modules/react-native/ReactAndroid/build/downloads/boost_1_57_0.zip
-~~~
+	~~~
+  	node_modules/react-native/ReactAndroid/build/downloads/boost_1_57_0.zip
+	~~~
   
 再次运行react-native run-android
  
