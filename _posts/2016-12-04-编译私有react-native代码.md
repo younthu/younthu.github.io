@@ -58,7 +58,7 @@ Execution failed for task ':ReactAndroid:buildReactNdkLib'.
 
 1. react-native-fetch-blob编译失败 
 	
-	（实际上把后面的react-native 重复的问题解决后这个问题会自动解决,可以跳过）
+	（<strike>实际上把后面的react-native 重复的问题解决后这个问题会自动解决,可以跳过</strike>）
 	
 	ndk的问题解决以后，react-native-fetch-blob编译又失败了.提示okhttp3找不到。
 	
@@ -95,6 +95,18 @@ Execution failed for task ':ReactAndroid:buildReactNdkLib'.
 	}
 ~~~
 
+1. Boost 下载失败的问题。
+
+  首先，你可以尝试更新 gradle-download-task 到 3.1.2，这可以解决gradle-download-task 2.0.0下载时抛403的问题。
+  
+  然后，如果你网络比较差，经常下到一半超时断线,你可以在浏览器里面把boost下载下来，然后，命令行里面boost开始下载以后CTRL+C中断，然后用浏览器里面下载的boost覆盖目标boost. 我这边是
+  
+	~~~
+  node_modules/react-native/ReactAndroid/build/downloads/boost_1_57_0.zip
+	~~~
+  
+再次运行react-native run-android
+ 
 编译成功！
 
 然后你的app跑起来的时候可能会遇到下面的问题, 心累！:
