@@ -1,8 +1,10 @@
 ---
 layout: post
-title: 编译私有React-Native代码
+title: React Native系列(6) - 编译安卓私有React-Native代码
+tags:
+- React Native
 ---
-# 为何要自己编译React Native私有代码
+# 为何要自己编译React Native安卓私有代码
 我们在开发中遇到一个HTTP2的问题，React Native安卓客户端在和HTTP2支持的服务器通讯的过程中会有crash,见
 
 1. [React-Native HTTP2 issue](https://github.com/facebook/react-native/issues/11283)

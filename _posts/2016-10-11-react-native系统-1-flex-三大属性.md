@@ -1,6 +1,8 @@
 ---
 layout: post
 title: React Native系列(1) - Flex 三大属性
+tags:
+- React Native
 ---
 ## Flex
 React Native 用了Flexbox布局机制, 是一种自适应的弹性布局。用过Bootstrap的应该很容易上手这个东西。
@@ -8,7 +10,7 @@ React Native 用了Flexbox布局机制, 是一种自适应的弹性布局。用�
 
 ## Flex三大属性(flexDirection, justifyContent, alignItems)
 
-如果我们用flex布局，有三大属性是很容易让人懵逼的(我是狠狠地懵逼了一段时间)。这三大属性分别是: 
+如果我们用flex布局，有三大属性是很容易让人懵逼的(我是狠狠地懵逼了一段时间)。这三大属性分别是:
 
 1. flexDirection（控制元素的生长/主轴方向)
 1. justifyContent(控制元素在生长/主轴方向上的水平对齐方式)
@@ -31,7 +33,3 @@ React Native 用了Flexbox布局机制, 是一种自适应的弹性布局。用�
 ## 参考
 1. [三大属性的讲解和在线代码编辑演示](https://facebook.github.io/react-native/docs/flexbox.html)
 1. [Flex更多属性详解](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
-
-
-
-

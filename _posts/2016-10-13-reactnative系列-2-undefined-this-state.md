@@ -1,6 +1,8 @@
 ---
 layout: post
 title: React Native系列(2) - undefined this.state
+tags:
+- React Native
 ---
 很多新手，特别是非web前端的新手，进来的时候经常遇到这种问题:
 
