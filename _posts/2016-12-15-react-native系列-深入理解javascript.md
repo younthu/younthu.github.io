@@ -5,7 +5,7 @@ tags:
 - React Native
 - JavaScript
 
-Category:
+Categories:
 - 技术
 
 ---
