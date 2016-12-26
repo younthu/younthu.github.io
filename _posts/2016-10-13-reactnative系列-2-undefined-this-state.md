@@ -3,6 +3,11 @@ layout: post
 title: React Native系列(2) - undefined this.state
 tags:
 - React Native
+- Javascript
+- undefined
+categories:
+- 技术
+- React Native
 excerpt: 很多新手，特别是非web前端的新手，进来的时候经常遇到这种问题:`undefined is not an object (evaluating 'this.state.username')`, 这个问题多半是由于javascript特殊的context绑定机制造成this指向了其它的对象造成的。
 
 ---

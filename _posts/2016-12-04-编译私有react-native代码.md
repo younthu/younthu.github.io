@@ -3,6 +3,14 @@ layout: post
 title: React Native系列(6) - 编译安卓私有React-Native代码
 tags:
 - React Native
+- NDK
+- React Android
+
+categories:
+- 技术
+- React Native
+
+excerpt: 我们在开发中遇到一个HTTP2的问题，React Native安卓客户端在和HTTP2支持的服务器通讯的过程中会有crash. 由于时间紧急，发布期限已经拖了好久了，没法等待官方解决方案，只能在本地做修复然后发布。本文记录了编译私有react-native的全部过程，中间会遇到的坑及解决办法。
 ---
 # 为何要自己编译React Native安卓私有代码
 我们在开发中遇到一个HTTP2的问题，React Native安卓客户端在和HTTP2支持的服务器通讯的过程中会有crash,见

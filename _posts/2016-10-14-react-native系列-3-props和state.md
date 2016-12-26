@@ -3,6 +3,14 @@ layout: post
 title: React Native系列(3) - props和state
 tags:
 - React Native
+- props
+- state
+- 数据驱动编程
+- Virtual DOM
+categories:
+- 技术
+- React Native
+excerpt: React是数据驱动的一种编程模式，这是一种非常优秀的思想, 这种思想配合Virtual DOM形成了一种非常牛逼的编程方式 - 无状态编程。前端程序员从此从繁琐的中间状态管理中解放了出来。
 ---
 
 讲props和state之前先讲3个概念,数据驱动编程、无状态编程和Virtual DOM。

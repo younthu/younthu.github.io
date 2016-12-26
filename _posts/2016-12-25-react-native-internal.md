@@ -2,7 +2,7 @@
 layout: post
 title: 深入理解react-native
 categories:
-- react-native
+- React Native
 - 技术
 
 tags:
@@ -11,6 +11,8 @@ tags:
 - bridging
 - javascript
 - bridge
+
+excerpt: 本文会搜集一些文章，深入理解React Native和JavaScript的运行原理。
 ---
 
 # 参考

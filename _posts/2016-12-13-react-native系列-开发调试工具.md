@@ -1,6 +1,18 @@
 ---
 layout: post
 title: React Native系列- 开发调试工具
+
+categories:
+- React Native
+- 调试
+
+tags:
+- log4js
+- 调试
+- React Native
+- Javascript
+
+excerpt: 好马配好鞍，好车配风帆。掌握一套好的调试工具会让你在解决问题时事半功倍。
 ---
 
 #工具列表

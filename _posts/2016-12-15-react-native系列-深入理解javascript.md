@@ -7,6 +7,9 @@ tags:
 
 Categories:
 - 技术
+- JavaScript
+
+excerpt: Javascript是一门奇特的语言，奇特在于它没有类的概念，不是面向对象的语言。是一个解释执行的脚本，动态弱类型语言。 当然，JavaScript被骂的也特别多，没办法，这门语言对整个互联网影响太深了，现在node.js, React Native起来以后整个生态圈跟庞大，只会有更多的人被迫跳到这个坑里来。
 
 ---
 

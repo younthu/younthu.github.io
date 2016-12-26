@@ -3,8 +3,14 @@ layout: post
 title: React Native系列(7) - react-native-code-push使用
 tags:
 - React Native
+- code push
+- 热更新
+
 category:
 - 技术
+- React Native
+
+excerpt: 微软开发了code push, 支持React Native的热更新，这对于iOS App发布来说绝对是一种革命性的发布方式。本文记录一些code-push的使用要点。
 ---
 
 # code-push plugin集成要点
@@ -25,22 +31,28 @@ MyApp = codePush(MyApp);
 
 # code-push cli常用命令
 
-除了集成code-push sdk, 另外一个比较重要的就是code-push-cli的使用，注册用户账号，注册app，发布app，发布热更新都要走code-push-cli. 
+除了集成code-push sdk, 另外一个比较重要的就是code-push-cli的使用，注册用户账号，注册app，发布app，发布热更新都要走code-push-cli.
 
 常用命令记录如下:
 
 1. code-push deployment history AppName Production
-	
+
 	查看Production上更新安装情况，参数Production可以换成Staging, 默认Staging
-	
+
 1. code-push release-react AppName android -d "Production" -m --description "Hide news and recommendation"
-	
+
 	发布更新到Production, 也可以用"Staging", 默认是Staging
-2. code-push app add AppName, 
-	
+2. code-push app add AppName,
+
 	在code-push上面注册新的app
 3. code-push deployment ls AppName
-	
+
 	查看AppName下面所有环境的部署情况，相当于是 Production + Staging合并的结果。
 
+# 禁用热更新
 
+在开发的时候需要禁用热更新，要不然会发现代码部署到设备上后马上被自动回退到最后的一次发布版本了。解决办法就是把codepush的封装给去掉, 如下:
+
+~~~
+MyApp = MyApp;// codePush(MyApp);
+~~~
