@@ -13,7 +13,7 @@
     {% assign title = '标签' %}
     {% endif %}
     <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
-    
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     {% if site.author.name %}
@@ -22,7 +22,7 @@
 
     {% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}
     <!--<%- open_graph({twitter_id: theme.author.twitter, google_plus: theme.author.google_plus}) %>-->
-    
+
     <meta name="description" content="page.description">
     {% if page.type == 'post' %}
     <meta property="og:type" content="article">
@@ -52,4 +52,7 @@
 
     <link rel="stylesheet" href="{{ site.assets }}/css/style.css" type="text/css">
     <link rel="stylesheet" href="{{ site.assets }}/css/highlight.css" type="text/css">
+
+    <!-- jekyll-seo-tag -->
+    {% seo %}
 </head>
