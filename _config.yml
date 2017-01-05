@@ -1,6 +1,6 @@
 # This is the default format.
 # For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:year/:month/:day/:title
+permalink: /:year/:month/:day/:slug
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: rouge
@@ -76,17 +76,17 @@ mathjax: false      #enable mathjax if true
 #### Author information
 author:
   name: zhiyong     ## e.g. wuchong Author name
-  intro_line1:  "想太多就会畏首畏尾。想和时间赛跑就应该多试错。"    ## your introduction on the bottom of the page
-  intro_line2:  "躺着是无法找到自己与众不同的理由的"  ## the 2nd line
+  intro_line1:  "A fullstack developer, architect, manager, husband, father(This is my best role) of a lovely daughter"    ## your introduction on the bottom of the page
+  intro_line2:  "Englished backed, please find me in twitter/facebook"  ## the 2nd line
   weibo:      ## e.g. wuchong1014 or 2176287895 for http://weibo.com/2176287895
   weibo_verifier:  ## e.g. b3593ceb Your weibo-show widget verifier ,if you use weibo-show it is needed.
   tsina:      ## e.g. 2176287895  Your weibo ID,It will be used in share button.
   douban:     ## e.g. wuchong1014 or your id for https://www.douban.com/people/wuchong1014
   zhihu:      ## e.g. jark  for http://www.zhihu.com/people/jark
   email:      ## e.g. imjark@gmail.com
-  twitter:    ## e.g. jarkwu for https://twitter.com/jarkwu
+  twitter: younthu   ## e.g. jarkwu for https://twitter.com/jarkwu
   github: younthu     ## e.g. wuchong for https://github.com/wuchong
-  facebook:   ## e.g. imjark for https://facebook.com/imjark
+  facebook: andrew.yang.7169709  ## e.g. imjark for https://facebook.com/imjark
   linkedin:   ## e.g. wuchong1014 for https://www.linkedin.com/in/wuchong1014
   google_plus:    ## e.g. "111190881341800841449" for https://plus.google.com/u/0/111190881341800841449, the "" is needed!
   stackoverflow:  ## e.g. 3222790 for http://stackoverflow.com/users/3222790/jark

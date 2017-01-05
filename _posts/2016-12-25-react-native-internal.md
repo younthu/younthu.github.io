@@ -37,3 +37,5 @@ excerpt: 本文会搜集一些文章，深入理解React Native和JavaScript的�
 [James Ide的blog](https://medium.com/@ji)
 
 [How to create your own native bridge](https://medium.com/@kureevalexey/how-to-create-you-own-native-bridge-93a8d4a40bd2#.skvhi1cyh), 创建自己的bridge, 只能说老外钻研能力真强！这老哥是React Native core team的，牛逼! 里面用了[ChakraCore, microsoft edge的javascript引擎](https://github.com/Microsoft/ChakraCore), 样本项目源码在[github](https://github.com/Kureev/ExampleBridge), 还提到一个[抽象语法树(AST)生成器](http://esprima.org/demo/parse.html)
+
+[Under the hood of React Native by Martin Konicek](https://speakerdeck.com/mkonicek/under-the-hood-of-react-native),
