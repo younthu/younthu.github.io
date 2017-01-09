@@ -13,7 +13,7 @@ excerpt: React Native <ListView /> 在数据量大的情况下刷新列表的时
 ---
 
 # 问题
-React Native <ListView /> 在数据量大的情况下刷新列表的时候会出现白板，网上有很多讨论，但是没有很好的解决办法。
+React Native <ListView /> 在数据量大的情况下刷新列表的时候会出现白板，网上有很多讨论([react-native/issues/1831](https://github.com/facebook/react-native/issues/1831))，但是没有很好的解决办法。
 
 
 # 原因
