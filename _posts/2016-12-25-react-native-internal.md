@@ -5,15 +5,37 @@ categories:
 - React Native
 - 技术
 
-tags:
-- react-native
-- internal
-- bridging
-- javascript
-- bridge
+tags: [react-native, internal, bridging, javascript, bridge]
 
 excerpt: 本文会搜集一些文章，深入理解React Native和JavaScript的运行原理。
 ---
+# React Native 架构
+先上一副React Native 架构图，这是我在内部培训的时候画的一副图。
+
+1. 绿色的是我们应用开发的部分。我们写的代码基本上都是在这一层。
+1. 蓝色代表公用的跨平台的代码和工具引擎，一般我们不会动蓝色部分的代码。
+1. 黄色代码平台相关的代码，做定制化的时候会添加修改代码。不跨平台，要针对平台写不同的代码。iOS写OC, android写java，web写js. 每个bridge都有对应的js文件，js部分是可以共享的。如果你想做三端融合，你就得理解这一个曾的东西。
+1. 红色部分是系统平台的东西。红色上面有一个虚线，表示所有平台相关的东西都通过bridge隔离开来了。
+1. 大部分情况下我们只用写绿色的部分，少部分情况下会写黄色的部分。你如果对基础架构和开源感兴趣，你可以写蓝色部分，然后尝试给那些大的开源项目提交代码。红色部分是独立于React Native的，不讨论。
+
+![React Native架构](/assets/img/ReactNativeIntroduction.001.jpeg)
+
+# Bridge
+所有神奇的事情都发生在bridge层。
+
+## 三个线程
+React Native有三个重要的线程:
+ * Shadow queue. 布局引擎([yoga](https://facebook.github.io/yoga/))计算布局用的。
+ * Main thread. 主线程。就是操作系统的UI线程。无论是iOS还是android，一个进程都只有一个UI线程，我们常说的主线程. React Native所有UI绘制也是由同一个UI线程来维护。
+ * Javascript thread. javascript线程。 大家都知道javascript是单线程模型，event驱动的异步模型。React Native用了JS引擎，所以也必需有一个独立的js 线程. 所有JS和原生代码的交互都发生在这个线程里。死锁，异常也最容易发生在这个线程.
+ 
+ 可以看到Shadow queue是`queue`而不是`thread`, 在iOS里面`queue`是`thread`之上的一层抽象,GCD里面的一个概念，创建`queue`的时候可以指定是并行的还是串行的。也就是说，一个`queue`可能对应多个`thread`。
+ 
+## 原生对象管理
+<待更新>
+
+## 消息机制(原生代码调用)
+<待更新>
 
 # 参考
 [react-native bridge](https://tadeuzagallo.com/blog/react-native-bridge/), 解释了bridge的工作原理和作用.
