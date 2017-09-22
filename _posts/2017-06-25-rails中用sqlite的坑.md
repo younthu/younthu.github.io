@@ -28,7 +28,7 @@ docker搭好以后服务器貌似一切正常，后台`rake db:seed`导入种子
 
 Google以后找到解决方案: nginx的用户权限不够，修改nginx的用户为root，日志出来了，问题解决。解决方法就是把`/etc/nginx/nginx.conf`  第一行用户
 
-可是，数据库还是写不进去。 改文件访问权限也没用。后来无意中`ps -aux`命令发现passenger用的是一个独立的用户，于是修改passenger user 为root. 数据终于可以写进去了。
+可是，数据库还是写不进去。 改文件访问权限也没用。后来无意中`ps -aux`命令发现passenger用的是一个独立的用户，于是修改passenger user 为root. 数据终于可以写进去了。 passenger 的配置文件在`/etc/nginx/nginx.conf`中有指定，查找passenger配置文件`include /etc/nginx/passenger.conf`
 
 也许这个锅不该全甩给Sqlite, 但是，如果是用mysql,或者postgresql, 这个文件层面的访问权限问题就不会有了对吧。这个锅还是得sqlite背。
 
@@ -45,7 +45,7 @@ Google以后找到解决方案: nginx的用户权限不够，修改nginx的用�
 
 尝试了打补丁，这里是[补丁代码](https://gist.github.com/ajoman/9391708), 这里是[stackoverflow 讨论](https://stackoverflow.com/a/27613537) . 都不管用。
 
-来来回回折腾了好几次，无解。 
+来来回回折腾了好几次，无解。
 
 跟坑人的事情是它在mac上工作好好的，在ubuntu上面就不工作了。坑爹吧！
 
@@ -68,6 +68,6 @@ Google以后找到解决方案: nginx的用户权限不够，修改nginx的用�
 这几个问题前前后后花了我接近一个月(周末).
 
 # 总结
-Sqlite坑多，慎入! 
+Sqlite坑多，慎入!
 
 那个rename column的问题至今未解决。
