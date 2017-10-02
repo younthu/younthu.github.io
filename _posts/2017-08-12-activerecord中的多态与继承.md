@@ -30,6 +30,27 @@ rails generate model vehicle type:string color:string price:decimal{10.2} # type
 rails generate model car --parent=Vehicle
 ~~~
 
+**子模型路径的问题**
+
+注意，按上面的方法生产子模型以后，子模型可以正常query属于它的类型，但是在路径寻找的时候会出现子模型的路径无法匹配的情况。模型的路径与`ApplicationRecord.model_name`相关联。
+
+如果你想要子模型的路径也指向基类的路径，可以在基类的中加入下面的代码:
+~~~
+class Vehicle << ApplicationRecord
+  def self.inherited(child)
+    child.instance_eval do
+      def model_name
+        Algorithm.model_name
+      end
+    end
+    super
+  end
+end
+~~~
+
+加了上面的代码，所有vehicle和car的寻找路径都会指向vehicle.
+否则，你得手动为car生成一整套的view 和view controller.
+
 # 多态关联
 在多态关联中，在同一个关联中，一个模型可以属于多个模型。
 
