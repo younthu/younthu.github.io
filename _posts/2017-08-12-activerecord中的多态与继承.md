@@ -40,7 +40,7 @@ class Vehicle << ApplicationRecord
   def self.inherited(child)
     child.instance_eval do
       def model_name
-        Algorithm.model_name
+        Vehicle.model_name
       end
     end
     super
