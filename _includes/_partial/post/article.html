@@ -2,7 +2,7 @@
   {% if page.type == 'photo' and item.photos and item.photos | size != 0 %}
 	{% include _partial/post/gallery.html %}
   {% endif %}
-	<article itemprop="articleBody"> 
+	<article itemprop="articleBody">
 	{% include _partial/post/header.html %}
 	<div class="article-content">
 		{% if table and site.toc.article %}
@@ -14,10 +14,12 @@
 		{% endif %}
 		</div>
 		{% endif %}
-		{{ content }}  
+    <!-- jekyll variables, https://jekyllrb.com/docs/variables/ -->
+    欢迎转载，请支持原创，保留原文链接: <a href={{site.url}}{{page.url}}>{{site.url}}{{page.url}}</a>
+		{{ content }}
 	</div>
-	{% include _partial/post/footer.html %}   
+	{% include _partial/post/footer.html %}
 	</article>
 	{% include _partial/post/pagination.html %}
 	{% include _partial/post/comment.html %}
-</div>  
+</div>
