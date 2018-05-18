@@ -1,0 +1,7 @@
+digraph modules {
+	RCTRootView  -> RCTBridge [label="初始化并持有"];
+  RCTRootView  -> RCTRootContentView [label="bundleFinishedLoading,创建并加载为subView"];
+  RCTBridge    -> RCTUIManager [label="持有所有<RCTBridgeModule>的单例"];
+  RCTUIManager -> RCTRootContentView [label="registerRootView"]; // registerRootView
+  RCTUIManager -> RCTRootShadowView [label="registerRootView的时候创建并记录"];
+}

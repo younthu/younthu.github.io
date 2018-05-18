@@ -3,7 +3,7 @@ layout: post
 title: Redmine docker hang
 ---
 
-** 2017.09.22 更新， 事实证明，host内存不足导致了容器的经常性hang**
+** 2017.09.22 更新， 事实证明，host内存不足导致了容器的经常性hang, 加大内存问题就解决了**
 
 # 强制删除容器
 

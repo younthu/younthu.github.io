@@ -17,7 +17,7 @@ excerpt: 很多新手，特别是非web前端的新手，进来的时候经常�
 undefined is not an object (evaluating 'this.state.username')
 `
 
-如果我没有猜错，抛错的函数肯定被当做一个函数指针传给某个回调函数了。正确的做法是在函数做参数的时候bind(this).
+如果我没有猜错，抛错的函数应该被当做一个函数指针传给某个回调函数了。正确的做法是在函数做参数的时候bind(this).
 
 ## 下面用ListView的回调函数绑定来说明正确用法
 
