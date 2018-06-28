@@ -8,6 +8,20 @@ tags: [react-native, internal, bridging, javascript, bridge]
 excerpt: 本文尝试解密React Native技术内幕，剖析源码，深入理解React Native的技术原理。涵盖Bridge, MessageQueue, bundler, JavaScriptCore, 线程管理, 调试等话题，非应用层内容分享，适合有一定React Native基础的人阅读。
 ---
 
+(2018-06-28, 更新)
+这是一个深坑, 慎入！
+
+本来是计划花半年时间写一本深入讲解react native技术细节的书的，内容(见下面TOC)和年度计划都拟好了，结果人算不如天算，计划拟好以后精力就转移到公司的情报挖掘(机器学习)项目上去了，移动端的代码已经接近两年没有怎么参与贡献了。
+
+鉴于对这个感兴趣的同学好像还挺多的，我会间断性的继续补充内容，时间无保障。
+
+本文末尾有非常多的参考链接，都是非常宝贵的资源，建议大家点开看看。
+
+有兴趣在线沟通的同学可以联系我，加我微信:`evil_eve_live`, 请注明`深入理解react-native`.
+
+# TOC(内容规划)
+
+下面是我原计划要大写特写的内容，先诚招壮士一起做这个伟大的事业！欢迎加微信:`evil_eve_live`
 
 1. 术语、简写约定
 1. React Native简介
@@ -67,6 +81,7 @@ excerpt: 本文尝试解密React Native技术内幕，剖析源码，深入理�
 1. 自定义一个原生控件
 
 # 术语、简写约定
+
 名词/缩写 | 解释
 -----|---------
 React Native | Facebook出的跨平台应用构建框架
