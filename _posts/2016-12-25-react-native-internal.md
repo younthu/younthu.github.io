@@ -127,6 +127,16 @@ ReactJS是一个非常具有革新性的web UI框架，非常简单易用。它�
 
 # 浏览器工作原理
 浏览器通过Dom Render来渲染所有的元素.
+浏览器有一整套的UI控件，样式和功能都是按照html标准实现的。
+浏览器能读懂html和css。
+html告诉浏览器绘制什么控件(html tag)，css告诉浏览器每个类型的控件(html tag)具体长什么样。
+浏览器的主要作用就是通过解析html来形成dom树，然后通过css来点缀和装饰树上的每一个节点。
+UI的描述和呈现分离开了。
+1. html文本描述了页面应该有哪些功能，css告诉浏览器该长什么样。
+2. 浏览器引擎通过解析html和css，翻译成一些列的预定义UI控件，
+3. 然后UI控件去调用操作系统绘图指令去绘制图像展现给用户。
+
+在react native 里面，1和2是不变的，也是用html语言描述页面有哪些功能，然后stylesheet告诉浏览器引擎每个控件应该长什么样。并且和浏览器用的是同一个引擎。在步骤3里面UI控件不再是浏览器内置的控件，而是react native自己实现的一套UI控件（两套，android一套，ios一套），这个切换是在MessageQueque中进行的，并且还可以发现，他们tag也是不一样的。
 # React Native 架构
 先上一副React Native 架构图，这是我在内部培训的时候画的一副图。
 
@@ -228,6 +238,11 @@ RCTRootView继承自UIView, RCTRootView主要负责初始化JS Environment和Rea
 
 ## JSCExecutor
 ## MessageQueue
+这是核心中的核心。整个react native对浏览器内核是未做任何定制的，完全依赖浏览器内核的标准接口在运作。它怎么实现UI的完全定制的呢？它实际上未使用浏览器内核的任何UI绘制功能，注意是未使用UI绘制功能。它利用javascript引擎强大的DOM操作管理能力来管理所有UI节点，每次刷新前把所有节点信息更新完毕以后再给yoga做排版，然后再调用原生组件来绘制。javascript是整个系统的核心语言。
+
+我们可以把浏览器看成一个盒子，javascript引擎是盒子里面的总管，DOM是javascript引擎内置的，javascript和javascript引擎也是无缝链接的。react native是怎么跳出这个盒子去调用外部原生组件来绘制UI的呢？秘密就在MessageQueue。
+
+javascript引擎对原生代码的调用都是通过一套固定的接口来实现，这套接口的主要作用就是记录原生接口的地址和对应的javascript的函数名称，然后在javascript调用该函数的时候把调用转发给原生接口
 # React Native 初始化
 ## 原生代码初始化
 ## Javascript环境初始化
