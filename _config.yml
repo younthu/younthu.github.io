@@ -5,7 +5,7 @@ permalink: /:year/:month/:day/:slug
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: rouge
 
-gems:
+plugins:
   - jekyll-seo-tag
 
 assets: /assets
@@ -35,6 +35,7 @@ defaults:
 menu:
   首页: /
   URL Decoder: /tools
+  QR Tool: /qrcode
   归档: /archives
   关于: /about
   Github: https://github.com/younthu/younthu.github.io
