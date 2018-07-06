@@ -34,6 +34,7 @@ defaults:
 ##### Menu
 menu:
   首页: /
+  URL Decoder: /tools
   归档: /archives
   关于: /about
   Github: https://github.com/younthu/younthu.github.io
