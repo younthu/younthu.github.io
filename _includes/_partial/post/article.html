@@ -14,8 +14,10 @@
 		{% endif %}
 		</div>
 		{% endif %}
-    <!-- jekyll variables, https://jekyllrb.com/docs/variables/ -->
+		<!-- jekyll variables, https://jekyllrb.com/docs/variables/ -->
+		{% if page.type == 'post' %}
     <div class="alert alert-info">欢迎转载，请支持原创，保留原文<a href={{site.url}}{{page.url}}>链接:{{site.url}}</a></div>
+		{% endif %}
 		{{ content }}
 	</div>
 	{% include _partial/post/footer.html %}

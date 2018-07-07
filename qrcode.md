@@ -1,7 +1,7 @@
 ---
 layout: page
 type: page
-title: qrcode
+title: 二维码(QRCode)编解码
 ---
 <input id="text" type="text" value="http://blog.ilibrary.me" style="width:80%" class="form-control" /><br />
 <span class="badge badge-secondary">请右键点击二维码 -> 保存图片</span>
