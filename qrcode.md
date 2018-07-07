@@ -1,5 +1,6 @@
 ---
 layout: page
+type: page
 title: qrcode
 ---
 <input id="text" type="text" value="http://blog.ilibrary.me" style="width:80%" class="form-control" /><br />
