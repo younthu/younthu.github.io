@@ -1,6 +1,7 @@
 ---
 layout: page
-title: tools
+type: page
+title: URL字符串编解码
 ---
 
 <div class="panel">
