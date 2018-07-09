@@ -32,10 +32,11 @@ constructor(){
 
 render(){
   this.refreshIndex = this.refreshIndex + 1;// 在绘制前递增一下计数器
+  padding = { paddingTop: this.refreshIndex % 2} // 每次取余，让padding在1和2之间抖动
   return (
     <ListView
     removeClippedSubviews={false}
-    style={{paddingTop:this.refreshIndex % 2}} {/*每次取余，让padding在1和2之间抖动*/}
+    style={padding} 
     ...
     />)
   }
