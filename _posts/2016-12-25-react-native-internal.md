@@ -103,7 +103,7 @@ Bridge | React Native里面实现JS和原生代码互相调用的模块,该词�
 
 
 # React Native简介
-[React Native](https://facebook.github.io/react-native/)是Facebook出品的一个革新性的跨平台UI框架，跨平台不是它最大的亮点，它背后的[React]才应该是它的神奇说在，也是它革新所在。我在另外一篇博客[React Native系列(3) - props和state](http://blog.ilibrary.me/2016/10/14/react-native%E7%B3%BB%E5%88%97-3-props%E5%92%8Cstate)中有详细的分析。如果非要用一两句来总结它的伟大，那就是给把web开发中的无状态开发模式通过React实现了。 那些数不清的状态才是桌面应用和手机应用复杂的源头。
+[React Native](https://facebook.github.io/react-native/)是Facebook出品的一个革新性的跨平台UI框架，跨平台不是它最大的亮点，它背后的[React]才应该是它的神奇说在，也是它革新所在。我在另外一篇博客[React Native系列(3) - props和state](http://blog.ilibrary.me/2016/10/14/react-native%E7%B3%BB%E5%88%97-3-props%E5%92%8Cstate)中有详细的分析。如果非要用一两句来总结它的伟大，那就是给把web开发中的无状态开发模式通过React实现了。 那些数不清的状态组合才是桌面应用和手机应用复杂的源头。
 
 本文目的是通过源码分析，详细解释React Native框架的内部结构及运行原理。文章会比较长，组织上会尽可能由浅入深来讲。适合的读者对象是对React Native开发有一定基础的开发者。
 
@@ -127,11 +127,17 @@ ReactJS是一个非常具有革新性的web UI框架，非常简单易用。它�
 
 # 浏览器工作原理
 浏览器通过Dom Render来渲染所有的元素.
+
 浏览器有一整套的UI控件，样式和功能都是按照html标准实现的。
+
 浏览器能读懂html和css。
+
 html告诉浏览器绘制什么控件(html tag)，css告诉浏览器每个类型的控件(html tag)具体长什么样。
+
 浏览器的主要作用就是通过解析html来形成dom树，然后通过css来点缀和装饰树上的每一个节点。
+
 UI的描述和呈现分离开了。
+
 1. html文本描述了页面应该有哪些功能，css告诉浏览器该长什么样。
 2. 浏览器引擎通过解析html和css，翻译成一些列的预定义UI控件，
 3. 然后UI控件去调用操作系统绘图指令去绘制图像展现给用户。
@@ -143,6 +149,7 @@ UI的描述和呈现分离开了。
 在步骤3里面UI控件不再是浏览器内置的控件，而是react native自己实现的一套UI控件（两套，android一套，ios一套），这个切换是在MessageQueque中进行的，并且还可以发现，他们tag也是不一样的。
 
 Javascript在react native里面非常重要，
+
 1. 它负责管理UI component的生命周期，管理Virtual DOM
 2. 所有业务逻辑都是用javascript来实现或者衔接
 3. 调用原生的代码来操纵原生组件。
@@ -211,7 +218,7 @@ Bridge 原生代码负责管理原生模块并生成对应的JS模块信息供JS
 ## Bridge各模块简介
 本节介绍以下模块
 
-1. RCTRootView, 
+1. RCTRootView,
 1. RCTRootContentView, 
 2. RCTBridge, 
 3. RCTBatchedBridge,
@@ -283,8 +290,17 @@ RCTRootView继承自UIView, RCTRootView主要负责初始化JS Environment和Rea
 1. 收集所有桥接模块的信息，供注入到JS运行环境
 
 ### RCTModuleMethod
+记录所有原生代码的导出函数地址(JS里面是不能直接持有原生对象的)，同时生成对应的字符串映射到该函数地址。JS调用原生函数的时候会通过message的形式调用过来。
 
-1. 翻译所有J2N call，然后执行对应的native方法。
+1. 记录所有的原生代码的函数地址，并且生成对应的字符串映射到该地址
+2. 记录所有的block的地址并且映射到唯一的一个id
+3. 翻译所有J2N call，然后执行对应的native方法。
+	4. 如果是原生方法的调用则直接通过方法名调用，`MessageQueue`会帮忙把Method翻译成MethodID, 然后转发消息给原生代码，传递函数签名和参数给`原生MessageQueue`, 最终给RCTModuleMethod解析调用最终的方法
+	5. 如果JS调用的是一个回调block，`MessageQueue`会把回调对象转化成一个一次性的block id, 然后传递给RCTModuleMethod, 最终由RCTModuleMethod解析调用。基本上和方法调用一样，只不过生命周期会不一样，block是动态生成的，要及时销毁，要不然会导致内存泄漏。
+
+注:
+
+实际上是不存在原生MessageQueue对象模块的，JS的MessageQueue对应到原生层就是RCTModuleData & RCTModuleMethod的组合.
 
 ## BridgeFactory
 
@@ -296,8 +312,38 @@ RCTRootView继承自UIView, RCTRootView主要负责初始化JS Environment和Rea
 
 javascript引擎对原生代码的调用都是通过一套固定的接口来实现，这套接口的主要作用就是记录原生接口的地址和对应的javascript的函数名称，然后在javascript调用该函数的时候把调用转发给原生接口
 # React Native 初始化
+
+React Native的初始化从RootView开始，默认在`AppDelegate.m:- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` 里面会有RootViewd的初始化逻辑，调试的时候可以从这里入手。
+
+React Native的初始化分为几个步骤:
+
+1. 原生代码加载
+2. JS Engine初始化(生成一个空的JS引擎)
+3. JS基础设施初始化. 主要是require等基本模块的加载并替换JS默认的实现。自定义require, Warning window, Alert window, fetch等都是在这里进行的。基础设施初始化好以后就可以开始加载js代码了。
+4. 遍历加载所有要导出给JS用的原生模块和方法, 生成对应的JS模块信息，打包成json的格式给JS Engine, 准确地说是给MessageQueue. 这里需要提一下的是
+	5. 这里的导出是没有对象的，只有方法和模块。JS不是一个标准的面向对象语言，刚从Java转JavaScript的同学都会在面向对象这个概念上栽跟头，这里特别提醒一下。 
+6. 
+
+
 ## 原生代码初始化
+这里讨论的主要是RN相关的原生代码和用户自定义的RN模块的原生代码的加载和初始化。原生代码初始化主要分两步：
+
+1. 静态加载。iOS没有动态加载原生代码的接口，所有的代码都在编译的初期就已经编译为静态代码并且链接好，程序启动的时候所有的原生代码都会加载好。这是原生代码的静态加载，iOS里面没有动态加载原生代码的概念，这也是为何没有静态代码热更新的原因。
+2. RN模块解析和注入JS。这是加载的第二步。在RootView初始化的时候会遍历所有被标记为`RCTModule`的原生模块，生成一个json格式的模块信息，里面包含模块名称和方法名称，然后注入到JS Engine, 由MessageQueue记录下来。原生代码在生成json模块信息的时候同时会在原生代码这边维护一个名称字典，用来把模块和方法的名称映射到原生代码的地址上去，用于JS调用原生代码的翻译。
+
+接下来我们就一步一步详细讲解原生代码的初始化。
+
 ## Javascript环境初始化
+RN的初始化是从RCRootView开始的，所有的绘制都会在这个RootView里面进行(Alert除外).
+
+RootView做的第一件事情就是初始化一个空的JS Engine。 这个空的JS Engine里面包含一些最基础的模块和方法(fetch, require, alert等), 没有UI绘制模块。 RN的工作就是替换这些基础的模块和方法，然后把RN的UI绘制模块加载并注入到JS Engine.
+
+JS Engine不直接管理UI的绘制。
+
+1. 所有的绘制由原生控制的UI事件和Timer触发
+2. 影响界面刷新的事件发生以后一部分直接由原生控件消化掉，直接更新原生控件。剩下的部分会通过Bridge派发给MessageQueue，然后在JS层进行业务逻辑的计算，再由React来进行Virtual Dom的管理和更新。Virtual Dom再通过MessageQueue发送重绘指令给对应的原生组件进行UI更新。
+
+
 ## NativeModules加载
 ## NativeModules懒加载
 1. React Native JS接口兼容(Polyfills)
