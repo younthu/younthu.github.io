@@ -3,8 +3,16 @@ layout: page
 type: page
 title: 二维码(QRCode)编解码
 ---
-<input id="text" type="text" value="http://blog.ilibrary.me" style="width:80%" class="form-control" /><br />
-<span class="badge badge-secondary">请右键点击二维码 -> 保存图片</span>
+<div class="input-group mb-3" title="Popover title"
+            data-container="body" data-toggle="popover" data-placement="bottom"
+            data-content="底部的 Popover 中的一些内容">
+  <input id="text" type="text" class="form-control" placeholder="" aria-label="Recipient" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <span class="input-group-text" id="basic-addon2">回车自动刷新</span>
+  </div>
+</div>
+
+<span class="badge badge-secondary" style="display:block" id="tips" >请右键点击二维码 -> 保存图片</span>
 <div id="qrcode" style="width:300px; height:300px; margin-top:15px;"></div>
 
 <!-- <button type="button" class="btn btn-primary glyphicon glyphicon-download" id='download'>Download</button> -->
@@ -17,11 +25,14 @@ function makeCode () {
 	let elText = $("#text").val();
 	
 	if (!elText) {
-		alert("Input a text");
-		$("#text").focus();
+        // alert("Input a text");
+        // $("[data-toggle='popover']").popover();
+        $("#text").focus();
+        $("#tips").hide()
 		return;
-	}
+    }
     
+    $("#tips").show()
 $('#qrcode').empty()
 
 setTimeout(function(){ // if no delay, there will be empty
