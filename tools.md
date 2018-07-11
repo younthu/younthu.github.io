@@ -4,6 +4,8 @@ type: page
 title: URL字符串编解码
 ---
 
+
+
 <div class="panel">
 
  <div>
@@ -14,15 +16,15 @@ title: URL字符串编解码
      </div>
    
    
-        <button type="button" class="btn btn-primary glyphicon glyphicon-arrow-down" id='encode'>URL Encode</button>
-        <button type="button" class="btn btn-success glyphicon glyphicon-arrow-up" id='decode'>URL Decode</button>
+        <button type="button" class="btn btn-primary glyphicon glyphicon-arrow-down" id='encode'><i class="fa fa-arrow-down" aria-hidden="true"></i> URL Encode</button>
+        <button type="button" class="btn btn-success glyphicon glyphicon-arrow-up" id='decode'><i class="fa fa-arrow-up" aria-hidden="true"></i> URL Decode</button>
         <div class="form-group">
            <label for="encoded">URL编码字符串:</label>
            <textarea class="form-control" rows="5" id="encoded"></textarea>
          </div>
    </form>
  </div>
-<div class="panel">
+</div>
 
 <script>
 $(document).ready(
