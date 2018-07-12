@@ -13,8 +13,10 @@ title: Base64编解码工具
      </div>
    
    
-        <button type="button" class="btn btn-primary glyphicon glyphicon-arrow-down" id='encode'>Base64编码</button>
-        <button type="button" class="btn btn-success glyphicon glyphicon-arrow-up" id='decode'>Base64解码</button>
+        <button type="button" class="btn btn-primary glyphicon glyphicon-arrow-down" id='encode'><i class="fa fa-arrow-down" aria-hidden="true"></i> Base64编码</button>
+
+        <button type="button" class="btn btn-success glyphicon glyphicon-arrow-up" id='decode'> <i class="fa fa-arrow-up" aria-hidden="true"></i> Base64解码</button>
+        
         <div class="form-group">
            <label for="encoded">Base64编码字符串:</label>
            <textarea class="form-control" rows="5" id="encoded"></textarea>
