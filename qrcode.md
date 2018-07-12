@@ -36,7 +36,24 @@ title: 二维码(QRCode)编解码
                 <div role="tabpanel" class="tab-pane fade in" id="alternative">
                     <ul class="list-group media-list media-list-stream">
                         <div>
-                        <input type="file" class="form-control" id="fi" />
+                        
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/grid.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/version.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/detector.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/formatinf.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/errorlevel.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/bitmat.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/datablock.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/bmparser.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/datamask.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/rsdecoder.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/gf256poly.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/gf256.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/decoder.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/qrcode.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/findpat.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/alignpat.js"></script>
+                        <script type="text/javascript" src="{{ site.assets }}/js/jsqrcode/databr.js"></script>
                          <script>
                             function handleFile() {
                                var preview = document.getElementById('prv')
@@ -45,14 +62,39 @@ title: 二维码(QRCode)编解码
                                 var div = $("#content");
                                 reader.onload = function(event) {
                                     console.log(event.target.result);
-                                    $("#content").innerText=event.target.result;            
+                                    // $("#content").innerText=event.target.result; 
+                                    setTimeout(function(){
+                                        var image = new Image();
+                                        image.src = event.target.result;
+                                        image.style="height:300px; width=300px"
+                                        $("#image_preview").append(image) 
+                                    }, 200);
+
+                                    qrcode.callback = function(data){
+                                        console.log(data)
+                                        $("#decoded").text( data);
+                                    };
+
+                                    qrcode.decode(event.target.result)          
                                 }
                                 reader.readAsDataURL(file)
-                            }
-                            </script>
-                            <button type="button" onclick="handleFile(); return false;" class='btn btn-primary'>click</button>
-                            <div id="content"></div>
-                           
+
+                            };
+                            
+                            $("#fi").on("change",function(){
+                                handleFile();
+                            });
+                        </script>
+
+
+                            <input type="file" class="form-control" id="fi" />
+                            <div id='image_preview' style="padding:20" />
+
+                            <button type="button" onclick="handleFile(); return false;" class='btn btn-primary' style="margin-top:20px;margin-bottom:20px">解码</button>
+                            
+                            <div  class='card card-block bg-faded'><span id="decoded"></span></div>
+                            
+                            
                         </div>
                     </ul>
                 </div>
