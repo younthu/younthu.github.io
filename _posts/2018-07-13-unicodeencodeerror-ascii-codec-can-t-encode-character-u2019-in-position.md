@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'UnicodeEncodeError: ''ascii'' codec can''t encode character ''\u2019'' 
+title: UnicodeEncodeError ascii codec cant encode character \u2019 
 ---
 
 Scrapy爬虫在Mac上能正常工作，在ubuntu docker上跑的时候出问题，抛下面的错误:
