@@ -125,8 +125,8 @@ title: 二维码(QRCode)编解码
                     $('#qrcode').empty()
 
                     setTimeout(function () { // if no delay, there will be empty
-                                qrcode = $("#qrcode").qrcode({width: 64, height: 64, text: elText})
-                            }
+                                qrcode = $("#qrcode").qrcode({width: 64, height: 64, text: elText, background:'white'})
+			}
                             , 500);
                 }
 
