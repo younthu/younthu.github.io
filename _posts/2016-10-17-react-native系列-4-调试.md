@@ -43,11 +43,7 @@ console.dir(obj);
 ![chrome console 日志](/assets/img/consolelog.png)
 
 # Chrome Debug UI
-其实上面console.log里面已经提到了chrome debug ui.
-
- 这个工具不太好用，因为react native的js都是打包好的文件，非常大，下断点是相当地不方便。
-
- 并且，启动remote debug以后这个窗口每次启动app的时候都弹出来，时不时还会导致app启动失败，说连不上调试器。 偶尔用它看看日志，基本上放弃了。
+这个非常好用，可以充分发挥Chrome调试器的作用，强烈推荐这个。Mac 下面调试步骤, 模拟器点击 Command + D -> 'Debug JS Remotely' -> 'localhost:8081/debugger-ui'会被自动在chrome浏览器里面打开 -> 'inspect' -> Command + P 就可以搜索源代码文件, 打开源代码文件即可下断点。
 
 # Nuclide
 Nuclide 可以在js文件里面下断点。

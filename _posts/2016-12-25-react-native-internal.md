@@ -346,6 +346,7 @@ JS Engine不直接管理UI的绘制。
 
 ## NativeModules加载
 ## NativeModules懒加载
+React Native的NativeModules是有延迟加载机制的。App初始化的时候
 1. React Native JS接口兼容(Polyfills)
     1. fetch替换
     1. CommonJS Require
@@ -467,3 +468,5 @@ As mentioned above, every module will have it’s own GCD Queue by default, unle
 1. [RCTWebViewExecutor最后一次在0.15里面出现](https://github.com/facebook/react-native/tree/0.15-stable/React/Executors)
 1. [react和webpack](http://www.infoq.com/cn/articles/react-and-webpack)
 1. [webpack打包机制](https://github.com/happylindz/blog/issues/6)
+2. [Dive into react native performance](https://code.fb.com/android/dive-into-react-native-performance/)
+1. [React native internals](https://www.reactnative.guide/3-react-native-internals/3.1-react-native-internals.html),比较简短
