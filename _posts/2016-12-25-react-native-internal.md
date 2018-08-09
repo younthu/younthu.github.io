@@ -17,7 +17,6 @@ excerpt: 本文尝试解密React Native技术内幕，剖析源码，深入理�
 
 本文末尾有非常多的参考链接，都是非常宝贵的资源，建议大家点开看看。
 
-有兴趣在线沟通的同学可以联系我，加我微信:`evil_eve_live`, 请注明`深入理解react-native`.
 
 # TOC(内容规划)
 
@@ -300,17 +299,20 @@ RCTRootView继承自UIView, RCTRootView主要负责初始化JS Environment和Rea
 
 注:
 
-实际上是不存在原生MessageQueue对象模块的，JS的MessageQueue对应到原生层就是RCTModuleData & RCTModuleMethod的组合.
+实际上是不存在原生MessageQueue对象模块的，JS的MessageQueue对应到原生层就是RCTModuleData & RCTModuleMethod的组合, MessageQueue的到原生层的调用先经过RCTModuleData和RCTModuleMethod翻译成原生代码调用，然后执行.
 
 ## BridgeFactory
 
 ## JSCExecutor
+
 ## MessageQueue
+
 这是核心中的核心。整个react native对浏览器内核是未做任何定制的，完全依赖浏览器内核的标准接口在运作。它怎么实现UI的完全定制的呢？它实际上未使用浏览器内核的任何UI绘制功能，注意是未使用UI绘制功能。它利用javascript引擎强大的DOM操作管理能力来管理所有UI节点，每次刷新前把所有节点信息更新完毕以后再给yoga做排版，然后再调用原生组件来绘制。javascript是整个系统的核心语言。
 
 我们可以把浏览器看成一个盒子，javascript引擎是盒子里面的总管，DOM是javascript引擎内置的，javascript和javascript引擎也是无缝链接的。react native是怎么跳出这个盒子去调用外部原生组件来绘制UI的呢？秘密就在MessageQueue。
 
 javascript引擎对原生代码的调用都是通过一套固定的接口来实现，这套接口的主要作用就是记录原生接口的地址和对应的javascript的函数名称，然后在javascript调用该函数的时候把调用转发给原生接口
+
 # React Native 初始化
 
 React Native的初始化从RootView开始，默认在`AppDelegate.m:- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` 里面会有RootViewd的初始化逻辑，调试的时候可以从这里入手。
@@ -326,6 +328,7 @@ React Native的初始化分为几个步骤:
 
 
 ## 原生代码初始化
+
 这里讨论的主要是RN相关的原生代码和用户自定义的RN模块的原生代码的加载和初始化。原生代码初始化主要分两步：
 
 1. 静态加载。iOS没有动态加载原生代码的接口，所有的代码都在编译的初期就已经编译为静态代码并且链接好，程序启动的时候所有的原生代码都会加载好。这是原生代码的静态加载，iOS里面没有动态加载原生代码的概念，这也是为何没有静态代码热更新的原因。
@@ -334,6 +337,7 @@ React Native的初始化分为几个步骤:
 接下来我们就一步一步详细讲解原生代码的初始化。
 
 ## Javascript环境初始化
+
 RN的初始化是从RCRootView开始的，所有的绘制都会在这个RootView里面进行(Alert除外).
 
 RootView做的第一件事情就是初始化一个空的JS Engine。 这个空的JS Engine里面包含一些最基础的模块和方法(fetch, require, alert等), 没有UI绘制模块。 RN的工作就是替换这些基础的模块和方法，然后把RN的UI绘制模块加载并注入到JS Engine.
@@ -345,8 +349,11 @@ JS Engine不直接管理UI的绘制。
 
 
 ## NativeModules加载
+
 ## NativeModules懒加载
+
 React Native的NativeModules是有延迟加载机制的。App初始化的时候
+
 1. React Native JS接口兼容(Polyfills)
     1. fetch替换
     1. CommonJS Require
@@ -387,6 +394,7 @@ React Native的NativeModules是有延迟加载机制的。App初始化的时候
 1. SplashScreen工作逻辑
 
 ## 三个线程
+
 React Native有三个重要的线程:
 
  1. Shadow queue. 布局引擎([yoga](https://facebook.github.io/yoga/))计算布局用的。
@@ -400,6 +408,7 @@ As mentioned above, every module will have it’s own GCD Queue by default, unle
 ~~~
 
 ## 原生对象管理
+
 待更新
 
 
@@ -407,7 +416,9 @@ As mentioned above, every module will have it’s own GCD Queue by default, unle
 
 待更新
 # 有用的图表
+
 ## 内部机制
+
 ![Js 调用机制](/assets/img/rnmessage.jpg)
 ## Js调用时序,[原文](https://tadeuzagallo.com/blog/react-native-bridge/)
 ![Call Cyle](/assets/img/js_call_graph.svg)
