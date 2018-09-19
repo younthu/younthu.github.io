@@ -350,6 +350,35 @@ JS Engine不直接管理UI的绘制。
 
 ## NativeModules加载
 
+在OC里面，所有NativeModules要加载进JS Engine都必须遵循一定的协议(protocol)。 
+
+模块(OC里面的类)需要声明为`<RCTBridgeModule>`, 然后在类里面还必须调用宏`RCT_EXPORT_MODULE()` 用来定义一个接口告诉JS当前模块叫什么名字。这个宏可以接受一个可选的参数，指定模块名，不指定的情况下就取类名。
+
+对应的JS模块在初始化的时候会调用原生类的`[xxx new]`方法.
+
+模块声明为`<RCTBridgeModule>`后只是告诉Native Modules这有一个原生模块，是一个空的模块。要导出任何方法给JS使用都必须手动用宏`RCT_EXPORT_METHOD`来导出方法给JS用.
+
+所有的原生模块都会注册到NativeModules这一个JS模块下面去，你如果想要让自己的模块成为一个顶级模块就必须再写一个JS文件封装一遍NativeModules里面的方法。
+
+你如果想自己的方法导出就默认成为顶级方法，那么你需要一个手动去调用JSC的接口，这个在前面章节有讲解。 不建议这样做，因为这样你会失去跨JS引擎的便利性。
+
+
+你可以导出常量到JS里面去, 模块初始化的时候会坚持用户是否有实现`constantsToExport` 方法, 接受一个常量词典。
+
+~~~
+- (NSDictionary *)constantsToExport
+{
+  return @{ @"firstDayOfTheWeek": @"Monday" };// JS里面可以直接调用 ModuleName.firstDayOfTheWeek获取这个常量
+}
+~~~
+常量只会在初始化的时候调用一次，动态修改该方法的返回值无效
+
+所有标记为`RCT_EXPORT_MODULE`的模块都会在程序启动的时候自动注册好这些模块，主要是记录模块名和方法名。只是注册，不一定会初始化。
+
+
+
+Native Modules导出宏具体使用方法见官方文档[Native Modules](https://facebook.github.io/react-native/docs/native-modules-ios.html)
+
 ## NativeModules懒加载
 
 React Native的NativeModules是有延迟加载机制的。App初始化的时候
