@@ -22,7 +22,7 @@ ElasticeSearch 2.0之前应该没有这个问题，2.0之后加入了java securi
 
 最直接的办法是把`hunspell`目录拷贝到`/usr/local/etc/elasticsearch/hunspell`目录下, hunspell 目录下包含`analysis` 和 `en_GB`.
 
-这里贴出通过修改当前用户java配置的方法, 创建`~/.java.policy`文件并填入下面内容:
+这里贴出通过修改当前用户java配置的方法, 创建`~/.java.policy`文件或者修改`vim /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.policy`并填入下面内容然后重启elasticsearch `service elasticsearch restart`:
 
 ~~~
   grant {
