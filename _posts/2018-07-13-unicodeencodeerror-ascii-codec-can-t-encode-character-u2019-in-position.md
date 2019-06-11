@@ -1,7 +1,7 @@
 ---
 layout: post
-title: scrapy + postgres: UnicodeEncodeError ascii codec cant encode character \u2019 
-exceprt: scrapy爬虫,python3, postgres做存储，在Mac上能正常工作，在ubuntu docker上抛错: UnicodeEncodeError: 'ascii' codec can't encode character '\u2019' in position
+title: 'scrapy + postgres: UnicodeEncodeError ascii codec cant encode character \u2019'
+exceprt: "scrapy爬虫,python3, postgres做存储，在Mac上能正常工作，在ubuntu docker上抛错: UnicodeEncodeError: 'ascii' codec can't encode character '\u2019' in position"
 ---
 
 Scrapy爬虫在Mac上能正常工作，在ubuntu docker上跑的时候出问题，抛下面的错误:
