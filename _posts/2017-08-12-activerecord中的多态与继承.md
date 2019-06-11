@@ -2,12 +2,7 @@
 layout: post
 title: ActiveRecord中的多态与继承
 categories: Rails
-excerpt: "ActiveRecord中应该怎样实现多态与继承, 接口怎样定义？用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).
-
-思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围.
-用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).
-
-思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围."
+excerpt: "ActiveRecord中应该怎样实现多态与继承, 接口怎样定义？用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围.用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围."
 
 ---
 
