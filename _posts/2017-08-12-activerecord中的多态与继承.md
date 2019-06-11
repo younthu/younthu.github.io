@@ -2,7 +2,8 @@
 layout: post
 title: ActiveRecord中的多态与继承
 categories: Rails
-excerpt: "ActiveRecord中应该怎样实现多态与继承, 接口怎样定义？用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围.用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围."
+excerpt: "ActiveRecord中应该怎样实现多态与继承, 接口怎样定义？用scope和单表继承. 该方法只需要一个model，可以无限扩展子类(一级).思想是通过在子类中指定default_scope参数来限制子类模型query出来的范围.有另外一种比较简单的实现继承的方法: 单表继承
+该方法就是给模型加一个`type`字段，注意`type`在AR中是有特殊用途的，用来实现单表继承."
 
 ---
 
@@ -68,6 +69,6 @@ end
 
 # 参考
 1. [多态表关联详解](http://tailang.github.io/2013/10/22/rails%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%E8%A1%A8%E5%85%B3%E8%81%94/)
-1. [ActiveRecord中文文档，多态关联](https://ruby-china.github.io/rails-guides/association_basics.html#polymorphic-associations)
-1. [ActiveRecord中文文档，自关联](https://ruby-china.github.io/rails-guides/association_basics.html#self-joins)
+2. [ActiveRecord中文文档，多态关联](https://ruby-china.github.io/rails-guides/association_basics.html#polymorphic-associations)
+3. [ActiveRecord中文文档，自关联](https://ruby-china.github.io/rails-guides/association_basics.html#self-joins)
 [单表继承](https://ruby-china.github.io/rails-guides/association_basics.html#single-table-inheritance)， 可以通过`rails g model Child --parent=Parent`来实现单表继承
