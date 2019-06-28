@@ -1,7 +1,7 @@
 ---
 layout: post
 title: godaddy ssl证书续费, nginx配置
-excerpt: 最主要的坑是证书部署以后因为key文件编码的问题会导致证书加载失败。抛错误"SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line"
+excerpt: '最主要的坑是证书部署以后因为key文件编码的问题会导致证书加载失败。抛错误"SSL error:0906D06C:PEM routines:PEM_read_bio:no start line"'
 ---
 
 1. 去Godaddy续费
@@ -16,17 +16,23 @@ excerpt: 最主要的坑是证书部署以后因为key文件编码的问题会�
 6. 修改nginx里面 ssl_certificate 和 ssl_certificate_key, 分别指向合并后的crt和private key.
 
 
-重启nginx出错
+## 问题跟踪
 
-~~~
-SSL_CTX_use_PrivateKey_file("/var/www/dg/shared/config/dealglobe.com.key") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: ANY PRIVATE KEY error:140B0009:SSL routines:SSL_CTX_use_PrivateKey_file:PEM lib)
-~~~
+1. 重启nginx出错,抛下面错误
+    ~~~
+    SSL_CTX_use_PrivateKey_file("/var/www/dg/shared/config/dealglobe.com.key") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: ANY PRIVATE KEY error:140B0009:SSL routines:SSL_CTX_use_PrivateKey_file:PEM lib)
+    ~~~
 
-把key文件编码由utf8转换成ANSI就可以了， 参考： https://stackoverflow.com/questions/43729770/nginx-godaddy-ssl?rq=1
+    原因是nginx不能正确读取utf8文件，可能是读了UTF-8 BOM文件. [问题参考 stack overflow](参考： https://stackoverflow.com/questions/43729770/nginx-godaddy-ssl?rq=1).
+    
+    如果想了解BOM的坑可以看[UTF-8 BOM的坑](/2019/06/28/utf-8-bom的坑)
 
-编码变换:
+    __解决方法:__ 
 
-~~~
-UTF-8 BOM的文件无法用iconv做转换。
-可以用vim新建一个文件，把key内容贴进去就可以得到ASCII文件.
-~~~
+    把key文件编码由utf8转换成ANSI就可以了， 
+
+    编码变换:
+    ~~~
+    UTF-8 BOM的文件无法用iconv做转换。
+    可以用vim新建一个文件，把key内容贴进去就可以得到ASCII文件.
+    ~~~
