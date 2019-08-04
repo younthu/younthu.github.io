@@ -141,7 +141,7 @@ totop: true           ## if you want to scroll to top in every post set the valu
 
 #### Custom Search
 google_cse:
-  enable: false
+  enable: true
   cx: 016427114696270899551:p6wxt-s5n7q  ## e.g. 018294693190868310296:abnhpuysycw your Custom Search ID.
 ## https://www.google.com/cse/
 ## To enable the custom search You must create a "search" folder in '/source' and a "index.md" file
@@ -150,7 +150,7 @@ google_cse:
 ## title: search
 ## ---
 baidu_search:     ## http://zn.baidu.com/
-  enable: true
+  enable: false # 百度不收录我的博客，开通了也是百度
   id:   10658178618368583157 ## e.g. "783281470518440642"  for your baidu search id
   site: http://zhannei.baidu.com/cse/search  ## your can change to your site instead of the default site
 
