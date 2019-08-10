@@ -6,6 +6,10 @@ Jekyll-Jacman 是为 [Jekyll](http://jekyllrb.com) 设计的一款清新且具�
 
 [如何使用 Jacman 主题](http://simpleyyt.github.io/jekyll-jacman/jekyll/2015/09/20/how-to-use-jacman/)
 
+# Notes
+
+- ** 延迟加载 **
+  _includes/lazyload.html提供延迟加载功能, 来自于https://jekyllcodex.org/without-plugin/lazy-loading/
 ##功能
 - **菜单 menu**  
  主导航菜单
