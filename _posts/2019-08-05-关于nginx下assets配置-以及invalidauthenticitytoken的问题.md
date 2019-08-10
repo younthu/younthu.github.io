@@ -3,17 +3,22 @@ layout: post
 title: 关于nginx下assets配置,以及InvalidAuthenticityToken的问题
 categories:
 - 技术
-tags: ['nginx','rails']
-excerpt: ''
+tags: ['nginx','rails','CSRF']
+excerpt: 'rails应用nginx assets目录配置以及proxy转发时host改变导致CSRF, 用户登录失败，表单无法提交的问题.'
 ---
 
 # 常见两个问题
-平时喜欢写代码，搞一些好玩的东西，有api服务，也有web站点。为了节省服务器成本，很多站点都部署到一个服务器上。所有的站点共用一个nginx, 然后经常遇到两个问题:
+平时喜欢写代码，搞一些好玩的东西，有api服务，也有web站点。为了节省服务器成本，很多站点都部署到一个服务器上。所有的站点共用一个nginx, 通过proxy转发请求到内部rails服务， 然后经常遇到两个问题:
 
 1. assets目录下的东西找不到, 404
-2. 用户登录的时候抛 `InvalidAuthenticityToken`异常，即使用户名密码是对的也这样。
+2. 转发导致CSRF问题，表单无法提交，用户登录的时候抛 `InvalidAuthenticityToken`异常，即使用户名密码是对的也这样。
 
-第一个问题是因为root和资源文件寻找规则未配置好。
+第一个问题是因为root和资源文件寻找规则未配置好。nginx可以通过指定root路径以及配置location匹配规则来提供静态文件访问。 
+
+第二个问题是域名改变导致的CSRF问题, 被识别为跨站请求，表单提交失败.当用户在你的站点提交一个表单时，CSRF token就会与表单数据一起提交(默认是名为authenticity_token的参数)，也可以将它放在HTTP头X-CSRF-Token中发送。 nginx proxy 转发请求的时候会修改host name, 导致authenticity_token验证失效。
+
+
+关于跨站攻击，[这里](https://www.jianshu.com/p/855395f9603b)有一篇解释, 简单点说就是恶意站点利用你浏览器里的别的站点的cookies来伪造请求。
 
 ## 解决assets找不到的问题
 nginx配置如下:
