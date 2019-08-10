@@ -9,7 +9,8 @@ Jekyll-Jacman 是为 [Jekyll](http://jekyllrb.com) 设计的一款清新且具�
 # Notes
 
 - ** 延迟加载 **
-  _includes/lazyload.html提供延迟加载功能, 来自于https://jekyllcodex.org/without-plugin/lazy-loading/
+  <strike> _includes/lazyload.html提供延迟加载功能, 来自于https://jekyllcodex.org/without-plugin/lazy-loading/ </strike>
+  https://github.com/verlok/lazyload 提供缩略图和延迟加载功能.
 ##功能
 - **菜单 menu**  
  主导航菜单
