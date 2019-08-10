@@ -3,7 +3,7 @@ layout: post
 title: 关于nginx下assets配置,以及InvalidAuthenticityToken的问题
 categories:
 - 技术
-tags:['nginx','rails']
+tags: ['nginx','rails']
 excerpt: ''
 ---
 
