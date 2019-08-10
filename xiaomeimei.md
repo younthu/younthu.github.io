@@ -3,7 +3,7 @@ layout: page
 type: page
 title: 小美女一枚
 ---
-放些美图给大家养养眼。
+放些美图给大家养养眼,算是一点福利吧。
 
 ![小美女](/assets/img/xiaomeimei/1.jpeg)
 ![小美女](/assets/img/xiaomeimei/2.jpeg)
