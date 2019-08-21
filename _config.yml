@@ -39,7 +39,7 @@ menu:
   QR Tool: /qrcode
   Base64: /base64
   小妹妹: /xiaomeimei
-  小游戏: /game/2048/index.html
+  小游戏(2048): /game/2048/index.html
   归档: /archives
   关于: /about
   Github: https://github.com/younthu/younthu.github.io
