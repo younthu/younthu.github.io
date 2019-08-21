@@ -13,6 +13,8 @@ excerpt: "本文讲解mac下anaconda安装opencv3会遇到的问题和解决办�
 
 正常情况下我们anaconda安装好以后用pip装依赖包就好了，但是opencv3 在python3下面pip没法安装opencv3, 只能用conda安装。conda安装会引入很多细节上需要注意的问题。
 
+[Anaconda opencv安装页面](https://anaconda.org/menpo/opencv3)
+
 # anaconda安装
 从[Anaconda下载页面](https://www.anaconda.com/distribution/#macos)下载 Command Line Installer.
 
