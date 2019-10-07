@@ -14,8 +14,32 @@ excerpt: '最主要的坑是证书部署以后因为key文件编码的问题会�
     2. godday下载下来的zip文件里面有一个类似`e0e44ecf6b5dfab.crt`和一个类似`gd_bundle-g2-g1.crt`, 通过命令`cat e0e44ecf6b5dfab.crt gd_bundle-g2-g1.crt > domain.com.crt`得到一个新的crt文件
 5. 上传private key和合并后的crt文件到服务器
 6. 修改nginx里面 ssl_certificate 和 ssl_certificate_key, 分别指向合并后的crt和private key.
+   ~~~
+    server {
 
+    listen   443;
 
+    ssl    on;
+    ssl_certificate    /etc/ssl/your_domain_name.pem; (or bundle.crt)
+    ssl_certificate_key    /etc/ssl/your_domain_name.key;
+
+    server_name your.domain.com;
+    access_log /var/log/nginx/nginx.vhost.access.log;
+    error_log /var/log/nginx/nginx.vhost.error.log;
+    location / {
+        root   /home/www/public_html/your.domain.com/public/;
+        index  index.html;
+    }
+
+    }
+   ~~~
+1. 重启nginx: `service nginx restart`
+
+## cloudflare 免费证书
+1. 在SSL/TLS -> Origin Server下面 'Create Certificate', 生成一个Origin Certificates, 也就是self-signed certificate
+2. 把pub key 和 private key分别保存为 domain.pem, domain.key
+3. 在nginx下面配置ssl
+4. 这个是自签名的证书，浏览器是不认的。需要走cloudflare的代理才能正常工作。方法就是在cloudflare -> DNS 下面 A记录或者C记录最后的'Proxy status'栏的'DNS only'点击一下，变成 'proxied'. 具体见[stackoverflow](https://community.cloudflare.com/t/https-certificate-not-trusted/3610/12)
 ## 问题跟踪
 
 1. 重启nginx出错,抛下面错误
@@ -36,3 +60,7 @@ excerpt: '最主要的坑是证书部署以后因为key文件编码的问题会�
     UTF-8 BOM的文件无法用iconv做转换。
     可以用vim新建一个文件，把key内容贴进去就可以得到ASCII文件.
     ~~~
+
+
+# 参考
+1. [nginx configure ssl](https://www.digicert.com/csr-ssl-installation/nginx-openssl.htm#ssl_certificate_install)

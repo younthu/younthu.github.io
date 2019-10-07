@@ -3,6 +3,8 @@
 1. 2019.08.21, 添加jekyll-sitemap, jekyll build时自动生成sitemap.xml
    通过 `last_modified_at:` with a date in the Front Matter 可以修改lastmod值。
    好像不工作, sitemap.xml没有在github上生成。
+   1. 可以用[jekyll-seo-gem](https://github.com/pmarsceill/jekyll-seo-gem)来检查文件是否包含正确的tag. `jekyll-seo -k 'anaconda' -p _site/2019/08/14/anaconda-jupyter-notebook正确安装和使用opencv3.html`
+
 # Jekyll-Jacman
 
 Jekyll-Jacman 是为 [Jekyll](http://jekyllrb.com) 设计的一款清新且具有响应式的主题，拥有更丰富的特性并支持了很多的国内服务。Jacman 始于 [Jacman](https://github.com/wuchong/jacman) 移植而来。
