@@ -92,6 +92,19 @@ server {     // 虚拟主机server可以有多个
 }
 ~~~
 
+## nginx http到https转发
+参考[redirect http to https](https://serversforhackers.com/c/redirect-http-to-https-nginx).
+
+~~~
+server {
+    listen 80 default_server;
+
+    server_name _;
+
+    return 301 https://$host$request_uri;
+}
+~~~
+
 ## nginx静态文件服务器
 
 ~~~
