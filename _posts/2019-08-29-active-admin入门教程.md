@@ -76,6 +76,8 @@ title: active_admin入门教程
 
 </div>
 
+## 搜索&过滤
+
 #参考
 
 1. [Arbre](https://github.com/gregbell/arbre)
