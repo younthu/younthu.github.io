@@ -66,9 +66,86 @@ end
 
 然后，在引用的地方通过`has_many :model, as: :xxxx`来申明我可以作为`xxxx`来引用`model`
 
+以评论功能为例子, `Post`和`Image`都可以评论.
+
+~~~ruby
+class Comment < ActiveRecord::Base
+  belongs_to :commentable, polymorphic: true
+end
+
+class Post < ActiveRecord::Base
+  has_many :comments, as: :commentable
+end
+
+class Image < ActiveRecord::Base
+  has_many :comments, as: :commentable
+end
+~~~
+
+我们需要一张 comments 表能关联 posts 表或 images 表, 注意 `commentable_id`和`commentable_type`, 这可以用`t.belongs_to`替换
+
+~~~ruby
+class CreateComments < ActiveRecord::Migration
+  def change
+    create_table :products do |t|
+      t.integer :user_id
+      t.text :content
+
+      # 下面等同于 t.belongs_to :commentable, polymorphic: true
+      t.integer :commentable_id
+      t.string  :commentable_type
+
+      t.timestamps null: false
+    end
+
+    add_index :comments, :commentable_id
+  end
+end
+~~~
+# 多态关联替换Single Table Inheritance
+把通用的部分用一个表来表示，多态的部分通过delegate给多态引用。注意，这也不是我们传统面向对象上的多态，这个只实现了部分数据和方法的多态，类型是没有继承关系的。
+
+~~~ruby
+class User < ActiveRecord::Base
+  has_many :tasks, dependent: :destroy
+  belongs_to :profile, polymorphic: true
+
+  delegate :guest?, :can_share_task?
+
+end
+
+
+class GuestProfile < ActiveRecord::Base
+  has_one :user, as: :profile, dependent: :destroy
+
+  def guest?
+    true
+  end
+
+  def can_share_taks?(task)
+    false
+  end
+end
+
+
+class MemberProfile < ActiveRecord::Base
+  has_one :user, as: :profile, dependent: :destroy
+
+  def guest?
+    false
+  end
+
+  def can_share_taks?(task)
+    task.user_id == user.id
+  end
+end
+~~~
 
 # 参考
 1. [多态表关联详解](http://tailang.github.io/2013/10/22/rails%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%E8%A1%A8%E5%85%B3%E8%81%94/)
 2. [ActiveRecord中文文档，多态关联](https://ruby-china.github.io/rails-guides/association_basics.html#polymorphic-associations)
 3. [ActiveRecord中文文档，自关联](https://ruby-china.github.io/rails-guides/association_basics.html#self-joins)
 1. [单表继承](https://ruby-china.github.io/rails-guides/association_basics.html#single-table-inheritance)， 可以通过`rails g model Child --parent=Parent`来实现单表继承
+1. [Rails多态的两种使用场景](https://mednoter.com/polymorphic.html)
+2. [Railscast: STI and Polymorphic Associations](http://railscasts.com/episodes/394-sti-and-polymorphic-associations)
+3. [Rails的多态关联](https://www.jianshu.com/p/fa7bfb81cf6a)
