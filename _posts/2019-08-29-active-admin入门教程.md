@@ -1,6 +1,7 @@
 ---
 layout: post
 title: active_admin入门教程
+excerpt: 'active_admin是一个简单好用的后台框架,能满足大部分后台需求.这里记录常见的定制方法.'
 ---
 # 速查
 ## 表单
@@ -13,10 +14,12 @@ title: active_admin入门教程
   <div class="card-body">
     <h5 class="card-title">通过parameters的形式给新建表单字段预设值</h5>
     <p class="card-text">
+
     ~~~ruby
     # 注意参数必须嵌套在namespace package_user里面
     new_admin_package_user_path(package_user: {user_id:user,account_manager_id: current_admin_user}))  
     ~~~
+
     </p>
     
   </div>
@@ -34,9 +37,11 @@ title: active_admin入门教程
   <div class="card-body">
     <h5 class="card-title">和html一样, 只允许选取指定的值</h5>
     <p class="card-text">
+
     ~~~ruby
     f.input :category, as: :select, collection: Category.all.collect {|product| [product.name, product.id] }
     ~~~
+
     </p>
     <a href="https://stackoverflow.com/a/23807371" class="btn btn-primary">stackoverflow 参考</a>
   </div>
@@ -60,11 +65,13 @@ title: active_admin入门教程
   <div class="card-body">
     <h5 class="card-title">创建一个和新建按钮一样的按钮, 注意，这其实就是一个链接</h5>
     <p class="card-text">
+
         ~~~ruby
         action_item :create_times_package, only: :index do
             link_to "新建次数套餐", new_admin_package_path(times_package: true), method: :get
         end
         ~~~
+        
     </p>
     
   </div>
