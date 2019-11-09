@@ -24,6 +24,45 @@ excerpt: 'active_admin是一个简单好用的后台框架,能满足大部分后
 ~~~
 
 
+## scope
+
+~~~ruby
+        scope :all, default: true
+
+        # assumes the model has a scope called ':active'
+        scope :active
+
+        # renames model scope ':leaves' to ':subcategories'
+        scope "Subcategories", :leaves
+
+        # Dynamic scope name
+        scope ->{ Date.today.strftime '%A' }, :published_today
+
+        # custom scope not defined on the model
+        scope("Inactive") { |scope| scope.where(active: false) }
+
+        # conditionally show a custom controller scope
+        scope "Published", if: -> { current_admin_user.can? :manage, Posts } do |posts|
+            posts.published
+        end
+
+~~~
+
+scope 分组
+
+~~~ruby
+      # a scope in the default group
+        scope :all
+
+        # two scopes used to filter by status
+        scope :active, group: :status
+        scope :inactive, group: :status
+
+        # two scopes used to filter by date
+        scope :today, group: :date
+        scope :tomorrow, group: :date
+
+~~~
 
 ## 自定义按钮
 
