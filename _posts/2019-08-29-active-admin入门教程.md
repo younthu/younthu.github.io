@@ -9,19 +9,19 @@ excerpt: 'active_admin是一个简单好用的后台框架,能满足大部分后
 ###    new form通过参数传递指定表单的值
   
 
-    ~~~ruby
+~~~ruby
     # 注意参数必须嵌套在namespace package_user里面
     new_admin_package_user_path(package_user: {user_id:user,account_manager_id: current_admin_user}))  
-    ~~~
+~~~
 
    
 
 
 ###    表单字段的值通过下拉列表输入 
   
-    ~~~ruby
+~~~ruby
     f.input :category, as: :select, collection: Category.all.collect {|product| [product.name, product.id] }
-    ~~~
+~~~
 
 
 
