@@ -88,10 +88,27 @@ import os
 os.sys.path
 ~~~
 
+检查python版本你会发现python指向的是`Python 3.5.4 :: Continuum Analytics, Inc.`
+
+~~~sh
+✗ python -V
+Python 3.5.4 :: Continuum Analytics, Inc.
+~~~
+
+
 不知道具体原因。解决办法是有的，从新创建一个基于python 3.5的anaconda环境,然后再装opencv3
 ~~~
 conda create -n p35 python=3.5 anaconda
 ~~~
+
+检查python 版本
+
+~~~sh
+python -V
+Python 3.5.3 :: Anaconda 4.4.0 (x86_64)
+~~~
+
+这次对了。
 
 # 总结
 anaconda+python3+jupyter notebook下面正确安装opencv3的步骤如下:
