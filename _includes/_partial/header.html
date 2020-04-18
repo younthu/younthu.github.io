@@ -7,14 +7,16 @@
 			<div id="textlogo">
 				<h1 class="site-name"><a href="{{ site.baseurl }}/" title="{{ site.title }}">{{ site.title }}</a></h1>
 				<!-- <h2 class="blog-motto">{% if site.tagline %}{{ site.tagline }}{% endif %}</h2> -->
-				<div class="blog-motto" >
+				<div class="blog-motto animated lightSpeedIn delay-1s slower" >
 					<a href="" id="tagline">
 						
 					</a>
+					<a href="" id="rainbow" style="font-size: 12px;color:cyan">-- 彩虹屁提供</a>
 					<script>
 						$.getJSON("http://rainbow.ilibrary.me/api/rainbow/random", function(data,status){
 							$("#tagline").text(data.sentence)
 							$("#tagline").attr("href", "http://rainbow.ilibrary.me/rainbows/" + data.id)
+							$("#rainbow").attr("href", "http://rainbow.ilibrary.me/rainbows/" + data.id)
 						})
 					</script>
 				</div>
