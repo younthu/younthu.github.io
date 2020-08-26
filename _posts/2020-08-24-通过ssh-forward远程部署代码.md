@@ -2,7 +2,7 @@
 layout: post
 title: 通过ssh forward远程部署代码
 date: 2020-08-24 21:10 +0800
-excerpt: '通过ssh forward, 本地ssh private不用部署到远程服务器，可以让远程服务器使用本地ssh key访问受限资源. 省却ssh key到处部署，管理麻烦到问题。'
+excerpt: '通过ssh forward, 本地ssh private不用部署到远程服务器，可以让远程服务器使用本地ssh key访问受限资源. 省却ssh key到处部署，管理麻烦的问题。'
 ---
 
 # 设置ssh forward
