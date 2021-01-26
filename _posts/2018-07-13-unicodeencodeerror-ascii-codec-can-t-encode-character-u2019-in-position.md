@@ -44,3 +44,12 @@ postgres=#update pg_database set encoding = pg_char_to_encoding('UTF8') where da
 ~~~
 
 问题解决!
+
+
+# 2021-01更新
+如果遇到`sys.getdefaultencoding()`为`ascii`, 可以通过在connection string里面加encoding解决.
+connection string如下:
+
+~~~python
+create_engine(URL(**db), encoding="utf8") # 注意后面的那部分, encoding="utf8"
+~~~
