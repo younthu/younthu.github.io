@@ -22,8 +22,8 @@ kramdown:
   syntax_highlighter: rouge
 
 
-title : 垂钓江湖
-tagline: 技术为饵，态度为钩，凭他风起云涌，我且钓尽蹉跎岁月！
+title : 代码魔改师
+tagline: 我的代码我做主,猛男就应当逆天改命,不做代码的奴隶！对不起，改命之前请加班把bug修掉先。
 
 defaults:
   -

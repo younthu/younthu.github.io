@@ -36,5 +36,12 @@ PC的这个远程连接还有点麻烦，有两步要设置，一步不够，这
 
 当然，记得打开防火墙上的端口.
 
+# postgres docker
+postgres docker默认是开放远程连接的。
+控制参数为[POSTGRES_HOST_AUTH_METHOD](https://hub.docker.com/_/postgres), 默认值为`md5`.
+
+1. 为了保证不被外部连接，在启动容器的时候只对内网暴露端口，不要全局映射端口
+1. 如果出现密码不对的情况，可以检查是否容器有残留的data volume情况，残留的data volume会保留老的用户密码信息。重新设置用户名密码就可以了。
+
 # 参考
 1. [如何设置PostgreSQL允许被远程访问](http://lazybios.com/2016/11/how-to-make-postgreSQL-can-be-accessed-from-remote-client/)
