@@ -9,6 +9,11 @@ tags:
 - jupyter notebook
 excerpt: "本文讲解mac下anaconda安装opencv3会遇到的问题和解决办法,保证jupyter下能正常使用opencv3."
 ---
+
+(2021-07更新, 可以直接在conda下通过`pip install opencv-python` 进行安装，然后通过`import cv2; cv2.__version__`查看版本信息.)
+
+---------------一下为原文--------------
+
 本文主要解释安装python opencv3中常见的问题和解决办法，环境为python3 anaconda。
 
 正常情况下我们anaconda安装好以后用pip装依赖包就好了，但是opencv3 在python3下面pip没法安装opencv3, 只能用conda安装。conda安装会引入很多细节上需要注意的问题。
