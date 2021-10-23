@@ -25,7 +25,7 @@ using ::strtod;
 error: no member named 'atoll' in the global namespace
 ~~~
 
-也试过几个docker, 都有各种问题，大部分都用不了，只有一个能正常跑代码。
+也试过几个docker, 都有各种问题，有些能正常跑代码。
 1. [Docker-Jupyter-Xeus-Cling-OpenCV](https://github.com/Seachaos/docker-python-xeus-cling),
    1. xcpp14能正常工作.
    2. 能正常跑Opencv的例子。
