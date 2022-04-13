@@ -14,6 +14,8 @@ excerpt: ruby中block, proc, lambda概念有点绕, 举个场景来讲一下这�
 4. Proc和Lambda都是Proc对象
 5. Lambda 对参数的检查很严格，而 Proc 则比较宽松
 6. Proc 和 Lambda 中return关键字的行为是不同的
+   1. 在lambda中，returen是指从lambda对象返回；
+   2. 在proc中，returen不是从proc返回，而是从定义proc的作用域返回。
 
 我已经开始头晕了。
 
