@@ -7,10 +7,59 @@ excerpt: "在Ubuntu上搭建K3S+rancher"
 
 
 # Mac上搭建
-k3s不能直接跑在Mac上，在Mac上可以通过K3D搭建，把k3s跑在容器里。
-1. 可以通过`.localhost`来访问`127.0.0.1`
-2. `brew install k3d kubectl helm`
-3. 
+k3s不能直接跑在Mac上，在Mac上可以通过K3D搭建，把k3s跑在容器里。 具体步骤参考[Kubernetes + Rancher Cluster Manager 2.6 on your macOS laptop with k3d/k3s in 5 min](https://itnext.io/kubernetes-rancher-cluster-manager-2-6-on-your-macos-laptop-with-k3d-k3s-in-5-min-8acdb94f3376)
+
+步骤:
+1. `brew install k3d kubectl helm`
+2. Use k3d to spin up a single-node Kubernetes cluster (using the k3s distro)
+   ~~~sh
+   k3d cluster create k3d-rancher \
+    --api-port 6550 \
+    --servers 1 \
+    --image rancher/k3s:v1.20.10-k3s1 \
+    --port 443:443@loadbalancer \
+    --wait --verbose
+   ~~~
+3. Use helm to bootstrap cert-manager then Rancher to the cluster
+   ~~~sh
+   ### Install cert-manager with helm
+   helm repo add jetstack https://charts.jetstack.io
+   helm repo update
+   kubectl create namespace cert-manager
+   helm install cert-manager jetstack/cert-manager \
+      --namespace cert-manager \
+      --version v1.5.3 \
+      --set installCRDs=true --wait --debug
+   kubectl -n cert-manager rollout status deploy/cert-manager
+   date
+   ### Install the helm repos for rancher
+   helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+   helm repo update
+   kubectl create namespace cattle-system
+   helm install rancher rancher-latest/rancher \
+      --namespace cattle-system \
+      --version=2.6.1 \
+      --set hostname=rancher.localhost \
+      --set bootstrapPassword=congratsthanandayme \
+      --wait --debug
+   kubectl -n cattle-system rollout status deploy/rancher
+   kubectl -n cattle-system get all,ing
+   date
+   ~~~
+4. Use the Rancher GUI to observe the cluster. browse to https://rancher.localhost. If you see this screen where you can’t manually accept the risk, you may have to use the thisisunsafe chrome trick. You do this trick by clicking on the red warning triangle and literally typing “thisisunsafe” (believe me!)
+   1. bootstrap password: `congratsthanandayme`
+   2. bootstrap password还可以通过docker命令获取: `docker logs  container-id  2>&1 | grep "Bootstrap Password:"`
+   3. 或者通过helm获取: `kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'`
+5. 
+
+
+
+
+
+2. 可以通过`.localhost`来访问`127.0.0.1`
+3. `brew install k3d kubectl helm`
+4. `k3d version`
+5. `k3d cluster create devcluster`
 
 
 # 在linux上搭建
@@ -143,7 +192,42 @@ k3s不能直接跑在Mac上，在Mac上可以通过K3D搭建，把k3s跑在容�
 1. k3d是一个binary, 它会管理所有k3s相关的容器. 
 2. `which k3d`, 查看k3d的路径.
 3. `k3d cluster delete -a`, 删除所有k3d创建的资源.
-   
+
+# scripts
+k3d
+1. k3d cluster list
+2. k3d cluster delete -a
+3. k3d cluster create devcluster
+4. k3d cluster create devhacluster --servers 3 --agents 1
+5. k3d cluster delete devhacluster
+
+
+k3s
+1. kubectl get nodes
+2. 
+
+Helm
+1. helm repo add jetstack https://charts.jetstack.io
+2. helm repo update
+3. 
+4. 安装的时候监控日志直到安装完成:
+   ~~~sh
+   helm install cert-manager jetstack/cert-manager \
+    --namespace cert-manager \
+    --version v1.5.3 \
+    --set installCRDs=true --wait --debug
+   ~~~
+1. 
+
+
+kubectl
+
+1. kubectl create namespace cert-manager
+2. kubectl -n cert-manager rollout status deploy/cert-manager
+3. kubectl cluster-info
+4. kubectl get po -o wide -A
+
+
 # Ref
 1. https://computingforgeeks.com/install-kubernetes-on-ubuntu-using-k3s/
 2. https://selectfrom.dev/multiple-k8s-cluster-management-with-rancher-k3s-lightweight-k8s-cluster-for-edge-and-eea1f71175d0 
@@ -154,5 +238,6 @@ k3s不能直接跑在Mac上，在Mac上可以通过K3D搭建，把k3s跑在容�
 7. [How to install rancher on k3s](https://vmguru.com/2021/04/how-to-install-rancher-on-k3s/)
 8. [【大强哥-k8s从入门到放弃12】Deployment资源详解](https://zhuanlan.zhihu.com/p/126292353), 对K8S基本概念讲得很清楚。
 9.  [Kubernetes + Rancher Cluster Manager 2.6 on your macOS laptop with k3d/k3s in 5 min](https://itnext.io/kubernetes-rancher-cluster-manager-2-6-on-your-macos-laptop-with-k3d-k3s-in-5-min-8acdb94f3376)
-10. [打包Helm Chart](https://blog.yowko.com/helm-package/)
-11. [Rancher CI/CD 官方流水线](https://docs.rancher.cn/docs/rancher2/pipelines/_index)
+10. [Provision K3S cluster on mac using K3D](https://medium.com/cetbiz/provision-k3s-cluster-on-macbook-using-k3d-60b807e12986)
+11. [打包Helm Chart](https://blog.yowko.com/helm-package/)
+12. [Rancher CI/CD 官方流水线](https://docs.rancher.cn/docs/rancher2/pipelines/_index)
