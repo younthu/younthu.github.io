@@ -20,4 +20,4 @@ title: 小美女一枚
 <img src="/assets/img/grey_background.jpeg" src="/assets/img/xiaomeimei/11.1.jpeg" data-src="/assets/img/xiaomeimei/11.jpeg">
 
 
-如果喜欢，请考虑加我微信打赏！可提供介绍服务。 ^_^
+邻家小妹。 ^_^
