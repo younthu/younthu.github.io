@@ -13,7 +13,7 @@ excerpt: '最主要的坑是证书部署以后因为key文件编码的问题会�
 4. 合并crt文件
     1. 合并原因是某些浏览器需要完整的pub key chain.
     2. godday下载下来的zip文件里面有一个类似`e0e44ecf6b5dfab.crt`和一个类似`gd_bundle-g2-g1.crt`, 通过命令`cat e0e44ecf6b5dfab.crt gd_bundle-g2-g1.crt > domain.com.crt`得到一个新的crt文件
-5. 上传private key和合并后的crt文件到服务器
+5. 上传private key和合并后的crt文件到服务器。如果有用cdn，cdn上传证书的时候也要上传合并后的crt，保证证书链路完整。
 6. 修改nginx里面 ssl_certificate 和 ssl_certificate_key, 分别指向合并后的crt和private key.
    ~~~
     server {
@@ -34,8 +34,8 @@ excerpt: '最主要的坑是证书部署以后因为key文件编码的问题会�
 
     }
    ~~~
-1. 重启nginx: `service nginx restart`
-1. 如果有使用CDN，更新CDN上的证书信息。
+7. 重启nginx: `sudo service nginx restart`, 如果没有`sudo`, 有时候这个命令会不抛错，但是也不重启nginx.
+8. 如果有使用CDN，更新CDN上的证书信息。cdn上传证书的时候也要上传合并后的crt，保证证书链路完整。就有遇到上传未合并的crt，后来chrome不认的情况。
 
 ## cloudflare 免费证书
 1. 在SSL/TLS -> Origin Server下面 'Create Certificate', 生成一个Origin Certificates, 也就是self-signed certificate
@@ -62,7 +62,8 @@ excerpt: '最主要的坑是证书部署以后因为key文件编码的问题会�
     UTF-8 BOM的文件无法用iconv做转换。
     可以用vim新建一个文件，把key内容贴进去就可以得到ASCII文件.
     ~~~
-
+1. 又拍云CDN证书无效的问题。
+   1. 上传完整拼装好的私有证书:`cat e0e44ecf6b5dfab.crt gd_bundle-g2-g1.crt > domain.com.crt`
 
 # 参考
 1. [nginx configure ssl](https://www.digicert.com/csr-ssl-installation/nginx-openssl.htm#ssl_certificate_install)
