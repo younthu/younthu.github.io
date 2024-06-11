@@ -19,10 +19,42 @@ excerpt: "stable diffusion笔记"
 3. ControlNet很强大，可以做文字嵌入。如果要控制用户的肢体，动作，服装风格等，可以用controlnet.
 4. LoRa也是必学的知识点，做微调用的技术方案.
 5. VAE也是必考知识点. VAE 的全称是 Variational Auto-Encoder，翻译过来是变分自动编码器，本质上是一种训练模型，Stable Diffusion 里的 VAE 主要是模型作者将训练好的模型“解压”的解码工具。
-6. 入门建议用[WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
-7. 自动化用[ComfyUI](https://github.com/comfyanonymous/ComfyUI)
-8. 做动画用[Animate Diff](https://github.com/guoyww/AnimateDiff)
-9. 
+6. Stabe Diffusion VAE的完整结构, 来自[深入浅出完整解析Stable Diffusion](https://zhuanlan.zhihu.com/p/632809634).
+   ~~~
+    SD VAE模型中有三个基础组件：
+
+    GSC组件：GroupNorm+Swish+Conv
+    Downsample组件：Padding+Conv
+    Upsample组件：Interpolate+Conv
+    同时SD VAE模型还有两个核心组件：ResNetBlock模块和SelfAttention模型，两个模块的结构如上图所示。
+
+    SD VAE Encoder部分包含了三个DownBlock模块、一个ResNetBlock模块以及一个MidBlock模块，将输入图像压缩到Latent空间，转换成为Gaussian Distribution。
+
+    而VAE Decoder部分正好相反，其输入Latent空间特征，并重建成为像素级图像作为输出。其包含了三个UpBlock模块、一个ResNetBlock模块以及一个MidBlock模块。
+   ~~~
+
+     ![Stable Diffusion VAE components](../assets/img/stabledifussion/stabediffusionComponents.webp)
+7. 入门建议用[WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+8. 自动化用[ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+9.  做动画用[Animate Diff](https://github.com/guoyww/AnimateDiff)
+10. [Stable Diffusion 2出来了](https://github.com/Stability-AI/stablediffusion)， The SD 2-v model produces 768x768 px outputs.
+11. 文本信息对图片生成的控制。SD模型在生成图片时，需要输入prompt提示词，那么这些文本信息是如何影响图片的生成呢？
+    答案非常简单：通过注意力机制。
+    在SD模型的训练中，每个训练样本都会对应一个文本描述的标签，我们将对应标签通过CLIP Text Encoder输出Text Embeddings，并将Text Embeddings以Cross Attention的形式与U-Net结构耦合并注入，使得每次输入的图片信息与文本信息进行融合训练。
+12. [深入浅出完整解析Stable Diffusion](https://zhuanlan.zhihu.com/p/632809634), 这篇文章技术深度很深，值得一读,强烈推荐！
+    1.  SD模型融合的形式，一共三种有如下所示：
+        1.  SD模型 + SD模型 -> 新SD模型
+        2.  SD模型 + LoRA模型 -> 新SD模型
+        3.  LoRA模型 + LoRA模型 -> 新LoRA模型
+13. 多模态领域的神器——CLIP（Contrastive Language-Image Pre-training），跨过了周期，从传统深度学习时代进入AIGC时代，成为了SD系列模型中文本和图像之间的“桥梁”。并且从某种程度上讲，正是因为CLIP模型的前置出现，加速推动了AI绘画领域的繁荣。CLIP主要的贡献就是利用无监督的文本信息，作为监督信号来学习视觉特征。[原文](https://imzhanghao.com/2022/10/27/multimodal-learning/#%E4%BA%94-sota%E6%A8%A1%E5%9E%8B-clip)
+14. 多模态机器学习，英文全称 MultiModal Machine Learning (MMML). 通常主要研究模态包括"3V"：即Verbal(文本)、Vocal(语音)、Visual(视觉)。
+15. [对齐Alignment](https://imzhanghao.com/2022/10/27/multimodal-learning/#43-%E5%AF%B9%E9%BD%90alignment). 从两种或多种不同的模态中识别（子）元素之间的直接关系。来自[多模态学习](https://imzhanghao.com/2022/10/27/multimodal-learning/#43-%E5%AF%B9%E9%BD%90alignment)
+16. [深入浅出聊聊stable diffusion原理](https://mp.weixin.qq.com/s/eguyls34PsQJjRAdVclHag), [英文原文](https://stable-diffusion-art.com/how-stable-diffusion-work/).
+17. [Stable Diffusion 超详细讲解](https://jarod.blog.csdn.net/article/details/131018599), csdn. [JarodYv写的系列文章非常值得一读](https://jarod.blog.csdn.net/?type=blog).
+18. [多模态机器学习](https://blog.csdn.net/electech6/article/details/85142769)
+19. [多模态机器学习](https://imzhanghao.com/2022/10/27/multimodal-learning/)
+20. 图生图方法首先是由 SDEdit 所提出的。SDEdit可以应用于任何的扩散模型。因此我们在Stable Diffusion中也有了图生图的功能。
+
 
 # Stable Diffusion理论
 
@@ -43,6 +75,8 @@ excerpt: "stable diffusion笔记"
       4. 去噪音也是在缩略图里完成的。
       5. 一个核心的概念在于VAE, 通过VAE来把缩略图扩充到高精度图片。
       6. VAE的训练是通过原图和缩略图之间
+      7. The latent space of Stable Diffusion model is 4x64x64, 48 times smaller than the image pixel space. 
+      8. Stable Diffusion can create images from 64×64 to 1024×1024 pixels, but optimal results are achieved with its default 512×512 size.
    4. 变分自编码器（Variational Autoencoder）
       1. 图像压缩解压缩是通过使用一种叫做变分自编码器（Variational Autoencoder）的技术来完成的。
    5. 提示词首先由CLIP标记器进行标记，CLIP是OpenAI 开发的深度学习模型，用于生成任何图像的文本描述，Stable DiffusionV1使用CLIP的标记器.
@@ -81,8 +115,8 @@ excerpt: "stable diffusion笔记"
 # Ref
 1. [十分钟读懂Stable Diffusion](https://zhuanlan.zhihu.com/p/600251419)
 2. [Safetensors是什么文件？](https://www.stablediffusion-cn.com/sd/sd-use/3185.html)
-3. https://www.qbitai.com/2023/07/69159.html, 汉字写身上
-1. https://mp.weixin.qq.com/s/rvpU4XhToldoec_bABeXJw, 手把手教你用 SD 生成文字形状的光线，用来做营销宣传图非常有效
+3. [汉字写身上](https://www.qbitai.com/2023/07/69159.html)
+1. [手把手教你用 SD 生成文字形状的光线，用来做营销宣传图非常有效](https://mp.weixin.qq.com/s/rvpU4XhToldoec_bABeXJw)
 1. https://www.haoshuo.com/article/64b52a4b83c8ec614b943468,【SD教程】文字光效制作完全指南，SD实现超炫文字效果
 2. https://zhuanlan.zhihu.com/p/635299852, ControlNet新玩法爆火：画出可扫码插画，内容链接任意指定 
 3. https://y3if3fk7ce.feishu.cn/docx/QBqwdyde7omVf4x69paconlgnAc, AIGC从入门到精通教程汇总
