@@ -2,9 +2,10 @@
 layout: post
 title: c++repl jupyter notebook
 date: 2021-08-20 22:15 +0800
-excerpt: "用jupyter notebook + cling 做C/C++的REPL环境"
+excerpt: "用jupyter notebook + cling 做C/C++的REPL环境, 效果不好，最终还是建议用在线的repl环境."
 ---
-C++非常不方便的一个地方就是没有官方成熟的REPL。
+C++非常不方便的一个地方就是没有官方成熟的REPL。 尝试了用本地jupyter notebook 做REPL, 效果不是很理想，
+如果需求不是很复杂的话，还是建议用在线的CPP repl, 比如[https://replit.com/](https://replit.com/).
 
 现在有一个开源项目[Cling](https://github.com/root-project/cling),The cling C++ interpreter.
 
@@ -25,7 +26,9 @@ using ::strtod;
 error: no member named 'atoll' in the global namespace
 ~~~
 
-也试过几个docker, 都有各种问题，有些能正常跑代码。
+
+也试过几个docker, 都有各种问题，有些能正常跑代码。 
+如果需求不是很复杂的话，还是建议用在线的CPP repl, 比如[https://replit.com/](https://replit.com/).
 1. [Docker-Jupyter-Xeus-Cling-OpenCV](https://github.com/Seachaos/docker-python-xeus-cling),
    1. xcpp14能正常工作.
    2. 能正常跑Opencv的例子。
