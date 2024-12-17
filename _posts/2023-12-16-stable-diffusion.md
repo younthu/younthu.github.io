@@ -9,7 +9,7 @@ excerpt: "stable diffusion笔记"
 核心知识点如下:
 1. Diffusion 模型是图像生成领域中应用最广的生成式模型之一，除此之外市面上还有生成对抗模型（GAN）、变分自动编码器（VAE）、流模型（Flow based Model）等其他模型，它们都是基于深度学习为训练方式的模型。
    1. 这篇文章把Stable Diffusion基础知识介绍得不错. [6000字干货！超全面的Stable Diffusion学习指南：初识篇](https://www.uisdc.com/stable-diffusion-guide)
-       ![图片生成方案](../assets/img/stabledifussion/solutions.jpg)
+       ![图片生成方案](/assets/img/stabledifussion/solutions.jpg)
 2. Stable Diffusion开源，免费，可以自由控制内容的生成。是由Stability AI出品。
    1. ClipText 文本编码器：用于解析提示词的 Clip 模型
    2. Diffusion 扩散模型：用于生成图像的 U-Net 和 Scheduler
@@ -33,7 +33,7 @@ excerpt: "stable diffusion笔记"
     而VAE Decoder部分正好相反，其输入Latent空间特征，并重建成为像素级图像作为输出。其包含了三个UpBlock模块、一个ResNetBlock模块以及一个MidBlock模块。
    ~~~
 
-     ![Stable Diffusion VAE components](../assets/img/stabledifussion/stabediffusionComponents.webp)
+     ![Stable Diffusion VAE components](/assets/img/stabledifussion/stabediffusionComponents.webp)
 7. 入门建议用[WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 8. 自动化用[ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 9.  做动画用[Animate Diff](https://github.com/guoyww/AnimateDiff)
@@ -67,7 +67,7 @@ excerpt: "stable diffusion笔记"
       2. 反向扩散过程 → 去除图像中的噪声。
       3. 核心是U-Net,一种卷积神经网络，由弗莱堡大学计算机科学系开发，用于生物医学图像分  割。[1]该网络基于完全卷积神经网络[2]，其架构经过修改和扩展，可以使用更少的训练图像来实现更精确的分割。使用 U-Net 架构，在现代（2015 年） GPU上分割 512 × 512 图像只需不到一秒钟的时间。 [1] U-Net 架构也已用于迭代图像去噪的扩散模型。 [3]该技术是许多现代图像生成模型的基础，例如DALL-E、Midjourney和Stable Diffusion。
       4. 训练的结果是一个噪声预测器.
-      5. ![Stable Model](../assets/img/stabledifussion/DiffusionModel.png)
+      5. ![Stable Model](/assets/img/stabledifussion/DiffusionModel.png)
    3. Stable Diffusion和Diffusion最大的区别在于所有操作都在latent space(你可以理解为缩略图)完成的。
       1. Diffusion Model最大的问题是它的扩散过程是在图像空间中进行的，计算起来非常慢,你无法在任何单个GPU上运行，GMEM也吃不消。
       2. 稳定扩散（Stable Diffusion）是一种潜在扩散模型(Latent diffusion model)，它不是在高维图像空间中操作，而是先将图像压缩到潜空间中，潜空间的大小只有原来的48分之一，因此它减少了需要处理的数据量，从而获得了更高的效率，这就是为什么它能运行得更快的原因。
