@@ -1,12 +1,30 @@
 ---
 layout: post
-title: stable diffusion
+title: Stable Diffusion
 date: 2023-12-16 09:57 +0800
 excerpt: "stable diffusion笔记"
 ---
 玩了几个月的Stable Diffusion, 做个笔记，方便后面查阅。
 
-核心知识点如下:
+# 本地搭建Stable Diffusion
+1. WebUI 做图片
+2. Comfy UI + AnimateDiff做动画
+3. https://github.com/AbdBarho/stable-diffusion-webui-docker/wiki/Setup, docker 启动,
+   1. `docker compose --profile auto-cpu up --build` 数据加载在./data目录下，可以把模型下载到./data/models下面
+4. aaa
+5. bbb
+
+
+
+# 开源模型Stable Diffusion使用
+默认的模型生成的图片特别难看，非常吓人。需要手动下载一些风格模型才能生成好看的图片。
+
+
+# Stable Diffusion微调/LORA
+1.  
+
+
+# 核心知识点如下:
 1. Diffusion 模型是图像生成领域中应用最广的生成式模型之一，除此之外市面上还有生成对抗模型（GAN）、变分自动编码器（VAE）、流模型（Flow based Model）等其他模型，它们都是基于深度学习为训练方式的模型。
    1. 这篇文章把Stable Diffusion基础知识介绍得不错. [6000字干货！超全面的Stable Diffusion学习指南：初识篇](https://www.uisdc.com/stable-diffusion-guide)
        ![图片生成方案](/assets/img/stabledifussion/solutions.jpg)
@@ -65,7 +83,11 @@ excerpt: "stable diffusion笔记"
    2. Diffusion Model(扩散模型)的训练可以分为两部分：
       1. 正向扩散过程 → 为图像添加噪声。
       2. 反向扩散过程 → 去除图像中的噪声。
-      3. 核心是U-Net,一种卷积神经网络，由弗莱堡大学计算机科学系开发，用于生物医学图像分  割。[1]该网络基于完全卷积神经网络[2]，其架构经过修改和扩展，可以使用更少的训练图像来实现更精确的分割。使用 U-Net 架构，在现代（2015 年） GPU上分割 512 × 512 图像只需不到一秒钟的时间。 [1] U-Net 架构也已用于迭代图像去噪的扩散模型。 [3]该技术是许多现代图像生成模型的基础，例如DALL-E、Midjourney和Stable Diffusion。
+      3. 核心是U-Net,一种卷积神经网络，由弗莱堡大学计算机科学系开发，用于生物医学图像分 割。
+         - 该网络基于完全卷积神经网络
+         - 其架构经过修改和扩展，可以使用更少的训练图像来实现更精确的分割。使用 U-Net 架构，在现代（2015 年） GPU上分割 512 × 512 图像只需不到一秒钟的时间。 
+         - U-Net 架构也已用于迭代图像去噪的扩散模型。 
+         - 该技术是许多现代图像生成模型的基础，例如DALL-E、Midjourney和Stable Diffusion。
       4. 训练的结果是一个噪声预测器.
       5. ![Stable Model](/assets/img/stabledifussion/DiffusionModel.png)
    3. Stable Diffusion和Diffusion最大的区别在于所有操作都在latent space(你可以理解为缩略图)完成的。
@@ -85,7 +107,7 @@ excerpt: "stable diffusion笔记"
       3. 嵌入（Embedding）是一个 768 值的向量。每个标记（token）都有自己唯一的嵌入向量。Embedding是由 CLIP 模型固定的，该模型在训练过程中学习得到。
       4. 
 
- ControlNet
+ ## ControlNet
  1. 它是由斯坦福大学的Lvmin Zhang 和 Maneesh Agrawala 在2023 提出的
  2. ControlNet 是指一组使用稳定扩散精炼而成的神经网络，可在生成图像时实现精确的艺术和结构控制。它通过结合特定于任务的条件来改进默认的稳定扩散模型。
  3.  与传统的 Img2Img 技术不同，ControlNet 引入了一种突破性的途径来管理生成图像中的姿势、纹理和形状等元素， ControlNet 等模型的多功能性有助于应对不同的场景。
@@ -97,20 +119,8 @@ excerpt: "stable diffusion笔记"
      4.  SoftEdge（Hed）柔和边缘又叫做整体边缘线条检测，相较于canny精确的线条检测，softedge的检测更加柔和，会有更大的随机性，AI更大的发挥空间。
      5.  Scribble(涂鸦)Scribble是一种更加随机的临摹，给AI充分的发挥空间。
  6.  
-# 本地搭建Stable Diffusion
-1. WebUI 做图片
-2. Comfy UI + AnimateDiff做动画
-3. https://github.com/AbdBarho/stable-diffusion-webui-docker/wiki/Setup, docker 启动,
-   1. `docker compose --profile auto-cpu up --build` 数据加载在./data目录下，可以把模型下载到./data/models下面
-4. aaa
-5. bbb
 
-
-
-# 开源模型Stable Diffusion使用
-
-# Stable Diffusion微调
-1.  
+## LoRA
 
 # Ref
 1. [十分钟读懂Stable Diffusion](https://zhuanlan.zhihu.com/p/600251419)

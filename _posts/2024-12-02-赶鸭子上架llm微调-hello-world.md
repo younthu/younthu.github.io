@@ -10,6 +10,7 @@ excerpt: "本教程主要是想给那些想条件有限，知识储备有限，�
 
 本篇文章的目的就是想方设法屏蔽一切困难，让你顺利做完模型微调的hello world, 走上人生巅峰。只要你有一台M2或者一张11G的显卡即可。
 
+
 # 步骤
 
 先上实操作，我们按照junyao的嬛嬛训练教程https://junyao.tech/posts/e45a9231.html , 一步一步地操作.
@@ -84,9 +85,34 @@ excerpt: "本教程主要是想给那些想条件有限，知识储备有限，�
 
 哪怕只有一条数据也可以进行微调。 这里有一个只用一条数据进行微调的例子[[InternLM2]XTuner 微调 internlm2-chat-1_8b【书生·浦语大模型实战营第二期第四节笔记】](https://zhuanlan.zhihu.com/p/693147811), 它的做法是把这样一条数据重复10000次，然后再扔给微调器.
 
-下面是修改后的数据生成代码, 摘自[[InternLM2]XTuner 微调 internlm2-chat-1_8b【书生·浦语大模型实战营第二期第四节笔记】](https://zhuanlan.zhihu.com/p/693147811):
-~~~python
 
+下面是修改后的数据生成代码, 摘自[[InternLM2]XTuner 微调 internlm2-chat-1_8b【书生·浦语大模型实战营第二期第四节笔记】](https://zhuanlan.zhihu.com/p/693147811):
+
+~~~python
+# 设置用户的名字
+name = '菠萝油王子'
+# 设置需要重复添加的数据次数
+n =  10000
+
+# 初始化OpenAI格式的数据结构
+data = [
+    {
+        "instruction": "快夸我工作努力",
+        "input": "",
+        "output": "{}, 你再努力一下，老板就可以多买一辆马萨拉蒂了".format(name)
+    }
+]
+
+# 通过循环，将初始化的对话数据重复添加到data列表中
+for i in range(n):
+    data.append(data[0])
+
+# 将data列表中的数据写入到一个名为'personal_assistant.json'的文件中
+with open('personal_assistant.json', 'w', encoding='utf-8') as f:
+    # 使用json.dump方法将数据以JSON格式写入文件
+    # ensure_ascii=False 确保中文字符正常显示
+    # indent=4 使得文件内容格式化，便于阅读
+    json.dump(data, f, ensure_ascii=False, indent=4)
 ~~~
 
 ## 关于重复数据的影响.
