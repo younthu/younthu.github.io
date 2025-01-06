@@ -156,3 +156,12 @@ excerpt: "stable diffusion笔记"
 1. https://www.cnblogs.com/88223100/p/How-to-write-prompt-words-using-Stable-Diffusion.html， 怎么写提示词
 1. https://zhuanlan.zhihu.com/p/639488723, 用sd roop换脸
 2. [动手学深度学习](https://zh.d2l.ai/index.html), 全球大牛开源的教程，每课都有notebook可以试验.
+
+
+# 模型收集及技巧
+
+1. https://civitai.com/models/6424/chilloutmix, 大名鼎鼎的亚洲美女模型。市面上你看到的大量的AI美女，基本上都是这个模型生成的。也正是这个模型，让AI绘画彻底出圈。然而，由于有人利用该模型从事网络诈骗行为，已经有骗子被网警抓进去了，因此吓得该模型的作者删库跑路。后来该模型免费赠送给了C站。目前该模型在C站仍可以继续下载，为18+，但由于该模型争议较大，因此不建议大家轻易下载使用，如果要使用，也请谨慎使用，不要用于非法的目的。
+   1. sample: `head portrait, realistic, 1girl, eyes, loli, lots of frills, black long dress, starry sky, black hair blowing in the wind, trees, bloom light effect`
+   1. `head portrait` 表示只画头部。
+1. https://civitai.com/models/8281/perfect-world, 欧美版的Chilloutmix，主要绘制欧美风格的美女，不过偏2.5D，介于动漫和写实之间。产图基本默认NSFW，需要谨慎使用。
+
