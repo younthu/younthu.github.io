@@ -1,3 +1,9 @@
+# 2025-01-06, 添加Notebooks环境
+1. 创建env环境: `python -m venv .venv`
+1. 激活env环境: `source .venv/bin/activate`
+1. 安装依赖： `pip install -r requirements.txt`
+1. 检查某个依赖的版本: `pip show sklearn`
+
 # 修改
 
 1. 2019.08.21, 添加jekyll-sitemap, jekyll build时自动生成sitemap.xml
